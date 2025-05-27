@@ -773,99 +773,10 @@ import uuid
 
 
 
-# workssss
-import streamlit as st
-import pandas as pd
-from supabase import create_client, Client
-import time
-
-# Supabase config
-SUPABASE_URL = "https://orjswswziiisbkvwnpye.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yanN3c3d6aWlpc2JrdnducHllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMjczNDQsImV4cCI6MjA2MzkwMzM0NH0.F2Oe53GzprWjiMYGvxMipplMwE2QeuKRRQI3Zsi7RAM"
-TABLE_NAME = "cc"
-
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-
-def fetch_data():
-    try:
-        response = supabase.table(TABLE_NAME).select("*").execute()
-        return pd.DataFrame(response.data)
-    except Exception as e:
-        st.error(f"Error fetching data: {e}")
-        return pd.DataFrame()
-
-def promote_member(row_id):
-    try:
-        # Confirm ID is string (important for UUID)
-        row_id = str(row_id)
-
-        # Run update
-        response = supabase.table(TABLE_NAME).update({
-            "Panel": "executive member"
-        }).eq("id", row_id).execute()
-
-        if response.data and len(response.data) > 0:
-            st.success("🎉 Member promoted to Executive Member!")
-            time.sleep(1)
-            st.rerun()
-        else:
-            st.warning(f"⚠️ Promotion failed — no rows updated. ID: {row_id}")
-    except Exception as e:
-        st.error(f"❌ Failed to promote: {e}")
-
-
-# Fetch data
-df = fetch_data()
-
-if "Panel" not in df.columns:
-    st.error("Missing 'Panel' column.")
-    st.stop()
-
-# Clean whitespace
-df["Panel"] = df["Panel"].astype(str).str.strip()
-
-# Panel labels mapping
-panel_labels = {
-    "Executive panel": "Executive Panel",
-    "Sub-executive panel": "Sub-Executive Panel",
-    "executive member": "Executive Member",
-    "general member": "General Member"
-}
-
-tabs = st.tabs(list(panel_labels.values()))
-
-for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
-    with tab:
-        panel_df = df[df["Panel"] == raw_label]
-
-        if panel_df.empty:
-            st.info(f"No members in {display_label}.")
-            continue
-
-        # Remove all-zero columns
-        def is_all_zero(series):
-            return ((series.astype(str).str.strip() == "0") | (series == 0)).all()
-
-        filtered_df = panel_df.loc[:, ~panel_df.apply(is_all_zero)]
-
-        st.subheader(f"{display_label} Members")
-
-        if raw_label == "general member":
-            for _, row in filtered_df.iterrows():
-                cols = st.columns([3, 3, 1])
-                cols[0].markdown(f"**Name:** {row.get('Name', 'N/A')}")
-                cols[1].markdown(f"**Panel:** {row.get('Panel', 'N/A')}")
-                if cols[2].button("Promote", key=f"promote_{row['id']}"):
-                    promote_member(row["id"])
-
-        else:
-            st.dataframe(filtered_df.reset_index(drop=True))
-
-# # json creation
+# workssss promo from gen to exec
 # import streamlit as st
 # import pandas as pd
 # from supabase import create_client, Client
-# import json
 # import time
 #
 # # Supabase config
@@ -878,40 +789,30 @@ for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
 # def fetch_data():
 #     try:
 #         response = supabase.table(TABLE_NAME).select("*").execute()
-#         df = pd.DataFrame(response.data)
-#         save_to_json(df)  # Save immediately after fetch
-#         return df
+#         return pd.DataFrame(response.data)
 #     except Exception as e:
 #         st.error(f"Error fetching data: {e}")
 #         return pd.DataFrame()
 #
-# def save_to_json(df, filename="cc_data.json"):
-#     try:
-#         data = df.to_dict(orient="records")
-#         with open(filename, "w", encoding="utf-8") as f:
-#             json.dump(data, f, ensure_ascii=False, indent=2)
-#         # Optional: st.info(f"📁 Data saved to `{filename}`")
-#     except Exception as e:
-#         st.error(f"❌ Failed to write JSON: {e}")
-#
 # def promote_member(row_id):
 #     try:
+#         # Confirm ID is string (important for UUID)
 #         row_id = str(row_id)
+#
+#         # Run update
 #         response = supabase.table(TABLE_NAME).update({
 #             "Panel": "executive member"
 #         }).eq("id", row_id).execute()
 #
 #         if response.data and len(response.data) > 0:
 #             st.success("🎉 Member promoted to Executive Member!")
-#             # Re-fetch updated data and save to JSON
-#             updated_df = fetch_data()
-#             save_to_json(updated_df)
 #             time.sleep(1)
 #             st.rerun()
 #         else:
 #             st.warning(f"⚠️ Promotion failed — no rows updated. ID: {row_id}")
 #     except Exception as e:
 #         st.error(f"❌ Failed to promote: {e}")
+#
 #
 # # Fetch data
 # df = fetch_data()
@@ -956,8 +857,112 @@ for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
 #                 cols[1].markdown(f"**Panel:** {row.get('Panel', 'N/A')}")
 #                 if cols[2].button("Promote", key=f"promote_{row['id']}"):
 #                     promote_member(row["id"])
+#
 #         else:
 #             st.dataframe(filtered_df.reset_index(drop=True))
 #
 
+# demote exec to gen
+import streamlit as st
+import pandas as pd
+from supabase import create_client, Client
+import time
+
+# Supabase config
+SUPABASE_URL = "https://orjswswziiisbkvwnpye.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yanN3c3d6aWlpc2JrdnducHllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMjczNDQsImV4cCI6MjA2MzkwMzM0NH0.F2Oe53GzprWjiMYGvxMipplMwE2QeuKRRQI3Zsi7RAM"
+TABLE_NAME = "cc"
+
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+def fetch_data():
+    try:
+        response = supabase.table(TABLE_NAME).select("*").execute()
+        return pd.DataFrame(response.data)
+    except Exception as e:
+        st.error(f"Error fetching data: {e}")
+        return pd.DataFrame()
+
+def promote_member(row_id):
+    try:
+        row_id = str(row_id)
+        response = supabase.table(TABLE_NAME).update({
+            "Panel": "executive member"
+        }).eq("id", row_id).execute()
+
+        if response.data and len(response.data) > 0:
+            st.success("🎉 Member promoted to Executive Member!")
+            time.sleep(1)
+            st.rerun()
+        else:
+            st.warning(f"⚠️ Promotion failed — no rows updated. ID: {row_id}")
+    except Exception as e:
+        st.error(f"❌ Failed to promote: {e}")
+
+def demote_member(row_id):
+    try:
+        row_id = str(row_id)
+        response = supabase.table(TABLE_NAME).update({
+            "Panel": "general member"
+        }).eq("id", row_id).execute()
+
+        if response.data and len(response.data) > 0:
+            st.success("👋 Member demoted to General Member.")
+            time.sleep(1)
+            st.rerun()
+        else:
+            st.warning(f"⚠️ Demotion failed — no rows updated. ID: {row_id}")
+    except Exception as e:
+        st.error(f"❌ Failed to demote: {e}")
+
+# Fetch data
+df = fetch_data()
+
+if "Panel" not in df.columns:
+    st.error("Missing 'Panel' column.")
+    st.stop()
+
+df["Panel"] = df["Panel"].astype(str).str.strip()
+
+panel_labels = {
+    "Executive panel": "Executive Panel",
+    "Sub-executive panel": "Sub-Executive Panel",
+    "executive member": "Executive Member",
+    "general member": "General Member"
+}
+
+tabs = st.tabs(list(panel_labels.values()))
+
+for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
+    with tab:
+        panel_df = df[df["Panel"] == raw_label]
+
+        if panel_df.empty:
+            st.info(f"No members in {display_label}.")
+            continue
+
+        def is_all_zero(series):
+            return ((series.astype(str).str.strip() == "0") | (series == 0)).all()
+
+        filtered_df = panel_df.loc[:, ~panel_df.apply(is_all_zero)]
+
+        st.subheader(f"{display_label} Members")
+
+        if raw_label == "general member":
+            for _, row in filtered_df.iterrows():
+                cols = st.columns([3, 3, 1])
+                cols[0].markdown(f"**Name:** {row.get('Name', 'N/A')}")
+                cols[1].markdown(f"**Panel:** {row.get('Panel', 'N/A')}")
+                if cols[2].button("Promote", key=f"promote_{row['id']}"):
+                    promote_member(row["id"])
+
+        elif raw_label == "executive member":
+            for _, row in filtered_df.iterrows():
+                cols = st.columns([3, 3, 1])
+                cols[0].markdown(f"**Name:** {row.get('Name', 'N/A')}")
+                cols[1].markdown(f"**Panel:** {row.get('Panel', 'N/A')}")
+                if cols[2].button("Demote", key=f"demote_{row['id']}"):
+                    demote_member(row["id"])
+        else:
+            st.dataframe(filtered_df.reset_index(drop=True))
 
