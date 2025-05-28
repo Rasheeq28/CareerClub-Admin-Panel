@@ -1165,7 +1165,6 @@ import uuid
 import streamlit as st
 import pandas as pd
 from supabase import create_client, Client
-import time
 
 # Supabase config
 SUPABASE_URL = "https://orjswswziiisbkvwnpye.supabase.co"
@@ -1183,34 +1182,22 @@ def fetch_data():
         return pd.DataFrame()
 
 def promote_member(row_id):
-    try:
-        row_id = str(row_id)
-        response = supabase.table(TABLE_NAME).update({"Panel": "executive member"}).eq("id", row_id).execute()
-        if response.data and len(response.data) > 0:
-            st.success("🎉 Member promoted to Executive Member!")
-            # Toggle session state to trigger rerun
-            st.session_state['needs_rerun'] = not st.session_state.get('needs_rerun', False)
-        else:
-            st.warning(f"⚠️ Promotion failed — no rows updated. ID: {row_id}")
-    except Exception as e:
-        st.error(f"❌ Failed to promote: {e}")
+    row_id = str(row_id)
+    response = supabase.table(TABLE_NAME).update({"Panel": "executive member"}).eq("id", row_id).execute()
+    if response.data and len(response.data) > 0:
+        st.success("🎉 Member promoted to Executive Member!")
+        st.experimental_rerun()
+    else:
+        st.warning(f"⚠️ Promotion failed — no rows updated. ID: {row_id}")
 
 def demote_member(row_id):
-    try:
-        row_id = str(row_id)
-        response = supabase.table(TABLE_NAME).update({"Panel": "general member"}).eq("id", row_id).execute()
-        if response.data and len(response.data) > 0:
-            st.success("👋 Member demoted to General Member.")
-            # Toggle session state to trigger rerun
-            st.session_state['needs_rerun'] = not st.session_state.get('needs_rerun', False)
-        else:
-            st.warning(f"⚠️ Demotion failed — no rows updated. ID: {row_id}")
-    except Exception as e:
-        st.error(f"❌ Failed to demote: {e}")
-
-# Initialize session state for rerun trigger
-if 'needs_rerun' not in st.session_state:
-    st.session_state['needs_rerun'] = False
+    row_id = str(row_id)
+    response = supabase.table(TABLE_NAME).update({"Panel": "general member"}).eq("id", row_id).execute()
+    if response.data and len(response.data) > 0:
+        st.success("👋 Member demoted to General Member.")
+        st.experimental_rerun()
+    else:
+        st.warning(f"⚠️ Demotion failed — no rows updated. ID: {row_id}")
 
 # Fetch data
 df = fetch_data()
@@ -1238,17 +1225,16 @@ for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
             st.info(f"No members in {display_label}.")
             continue
 
-        # Columns to display in the dataframe table
         display_cols = ["Name", "Panel", "fb id", "linkedin id"]
 
         st.subheader(f"{display_label} Members")
 
-        # Show data table for this panel (without the action buttons)
+        # Show data table
         st.dataframe(panel_df[display_cols].reset_index(drop=True))
 
-        # Show Promote/Demote buttons for general and executive members
+        # Buttons only for general/executive members
         if raw_label in ["general member", "executive member"]:
-            st.markdown("---")  # separator
+            st.markdown("---")
             for idx, row in panel_df.iterrows():
                 cols = st.columns([4, 1])
                 cols[0].markdown(f"**{row['Name']}**")
