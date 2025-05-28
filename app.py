@@ -991,14 +991,11 @@ def fetch_data():
 def promote_member(row_id):
     try:
         row_id = str(row_id)
-        response = supabase.table(TABLE_NAME).update({
-            "Panel": "executive member"
-        }).eq("id", row_id).execute()
-
+        response = supabase.table(TABLE_NAME).update({"Panel": "executive member"}).eq("id", row_id).execute()
         if response.data and len(response.data) > 0:
             st.success("🎉 Member promoted to Executive Member!")
             time.sleep(1)
-            st.experimental_rerun()
+            # st.experimental_rerun()  <-- remove or comment out
         else:
             st.warning(f"⚠️ Promotion failed — no rows updated. ID: {row_id}")
     except Exception as e:
@@ -1007,18 +1004,16 @@ def promote_member(row_id):
 def demote_member(row_id):
     try:
         row_id = str(row_id)
-        response = supabase.table(TABLE_NAME).update({
-            "Panel": "general member"
-        }).eq("id", row_id).execute()
-
+        response = supabase.table(TABLE_NAME).update({"Panel": "general member"}).eq("id", row_id).execute()
         if response.data and len(response.data) > 0:
             st.success("👋 Member demoted to General Member.")
             time.sleep(1)
-            st.experimental_rerun()
+            # st.experimental_rerun()  <-- remove or comment out
         else:
             st.warning(f"⚠️ Demotion failed — no rows updated. ID: {row_id}")
     except Exception as e:
         st.error(f"❌ Failed to demote: {e}")
+
 
 # Fetch data
 df = fetch_data()
