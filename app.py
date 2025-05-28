@@ -950,22 +950,23 @@ for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
 
         if raw_label == "general member":
             for _, row in filtered_df.iterrows():
-                cols = st.columns([3, 3, 1])
+                cols = st.columns([3, 3, 3, 3, 1])
                 cols[0].markdown(f"**Name:** {row.get('Name', 'N/A')}")
                 cols[1].markdown(f"**Panel:** {row.get('Panel', 'N/A')}")
-                if cols[2].button("Promote", key=f"promote_{row['id']}"):
+                cols[2].markdown(f"**LinkedIn ID:** {row.get('linkedin id', 'N/A')}")
+                cols[3].markdown(f"**FB ID:** {row.get('fb id', 'N/A')}")
+                if cols[4].button("Promote", key=f"promote_{row['id']}"):
                     promote_member(row["id"])
 
         elif raw_label == "executive member":
             for _, row in filtered_df.iterrows():
-                cols = st.columns([3, 3, 1])
+                cols = st.columns([3, 3, 3, 3, 1])
                 cols[0].markdown(f"**Name:** {row.get('Name', 'N/A')}")
                 cols[1].markdown(f"**Panel:** {row.get('Panel', 'N/A')}")
-                if cols[2].button("Demote", key=f"demote_{row['id']}"):
+                cols[2].markdown(f"**LinkedIn ID:** {row.get('linkedin id', 'N/A')}")
+                cols[3].markdown(f"**FB ID:** {row.get('fb id', 'N/A')}")
+                if cols[4].button("Demote", key=f"demote_{row['id']}"):
                     demote_member(row["id"])
-        else:
-            st.dataframe(filtered_df.reset_index(drop=True))
-
 
 # linkedin fb
 # import streamlit as st
