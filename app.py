@@ -1186,7 +1186,7 @@ def promote_member(row_id):
     response = supabase.table(TABLE_NAME).update({"Panel": "executive member"}).eq("id", row_id).execute()
     if response.data and len(response.data) > 0:
         st.success("🎉 Member promoted to Executive Member!")
-        st.experimental_rerun()  # Immediately refresh app after promote
+        st.session_state['needs_refresh'] = True
     else:
         st.warning(f"⚠️ Promotion failed — no rows updated. ID: {row_id}")
 
@@ -1195,9 +1195,21 @@ def demote_member(row_id):
     response = supabase.table(TABLE_NAME).update({"Panel": "general member"}).eq("id", row_id).execute()
     if response.data and len(response.data) > 0:
         st.success("👋 Member demoted to General Member.")
-        st.experimental_rerun()  # Immediately refresh app after demote
+        st.session_state['needs_refresh'] = True
     else:
         st.warning(f"⚠️ Demotion failed — no rows updated. ID: {row_id}")
+
+# Initialize flag
+if 'needs_refresh' not in st.session_state:
+    st.session_state['needs_refresh'] = False
+
+# Your UI and button logic here...
+
+# After all UI code but still top-level:
+if st.session_state['needs_refresh']:
+    st.session_state['needs_refresh'] = False
+    st.experimental_rerun()
+
 
 # Fetch data
 df = fetch_data()
