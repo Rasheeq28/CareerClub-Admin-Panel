@@ -862,7 +862,7 @@ import uuid
 #             st.dataframe(filtered_df.reset_index(drop=True))
 #
 
-# demote exec to gen
+# demote exec to gen + promo gen to exec
 import streamlit as st
 import pandas as pd
 from supabase import create_client, Client
@@ -871,7 +871,7 @@ import time
 # Supabase config
 SUPABASE_URL = "https://orjswswziiisbkvwnpye.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yanN3c3d6aWlpc2JrdnducHllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMjczNDQsImV4cCI6MjA2MzkwMzM0NH0.F2Oe53GzprWjiMYGvxMipplMwE2QeuKRRQI3Zsi7RAM"
-TABLE_NAME = "cc"
+TABLE_NAME = "cc_updated"
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
@@ -965,4 +965,5 @@ for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
                     demote_member(row["id"])
         else:
             st.dataframe(filtered_df.reset_index(drop=True))
+
 
