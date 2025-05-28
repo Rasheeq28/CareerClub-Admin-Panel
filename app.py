@@ -979,13 +979,22 @@ TABLE_NAME = "cc-3"
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
+# def fetch_data():
+#     try:
+#         response = supabase.table(TABLE_NAME).select("*").execute()
+#         return pd.DataFrame(response.data)
+#     except Exception as e:
+#         st.error(f"Error fetching data: {e}")
+#         return pd.DataFrame()
 def fetch_data():
     try:
         response = supabase.table(TABLE_NAME).select("*").execute()
+        st.write("Fetched data:", response.data)  # 👈 DEBUG LINE
         return pd.DataFrame(response.data)
     except Exception as e:
         st.error(f"Error fetching data: {e}")
         return pd.DataFrame()
+
 
 def promote_member(row_id):
     try:
