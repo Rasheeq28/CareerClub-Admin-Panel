@@ -957,11 +957,10 @@ for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
                         **Panel:** {row.get('Panel', 'N/A')}  
                         **FB ID:** {row.get('FB ID', 'N/A')}  
                         **LinkedIn ID:** {row.get('LinkedIn ID', 'N/A')}
-                        """,
-                        unsafe_allow_html=True
+                        """
                     )
-                    st.button("🎯 Promote to Executive", key=f"promote_{row['id']}", on_click=promote_member,
-                              args=(row['id'],))
+                    if st.button("🎯 Promote to Executive", key=f"promote_{row['id']}"):
+                        promote_member(row["id"])
                     st.markdown("---")
 
         elif raw_label == "executive member":
@@ -973,11 +972,10 @@ for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
                         **Panel:** {row.get('Panel', 'N/A')}  
                         **FB ID:** {row.get('FB ID', 'N/A')}  
                         **LinkedIn ID:** {row.get('LinkedIn ID', 'N/A')}
-                        """,
-                        unsafe_allow_html=True
+                        """
                     )
-                    st.button("↩️ Demote to General", key=f"demote_{row['id']}", on_click=demote_member,
-                              args=(row['id'],))
+                    if st.button("↩️ Demote to General", key=f"demote_{row['id']}"):
+                        demote_member(row["id"])
                     st.markdown("---")
 
 # linkedin fb
