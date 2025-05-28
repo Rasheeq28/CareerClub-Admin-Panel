@@ -1,144 +1,151 @@
-id,Name,Panel,Designation,Department
-1,Taiseer Ahmed,Executive panel,President,0
-2,Ahbab Zaiad Rafeed,Executive panel,General Secretary,0
-3,Md. Nahian Hasan,Executive panel,Senior Vice President (Administration),0
-4,Maisha Samiha,Executive panel,Senior Vice President (Communication),0
-5,Adiba Nawar Zuberi,Executive panel,Senior Vice President (External Affairs),0
-6,Talha Sany,Executive panel,Vice President (Administration),0
-7,Nowshad Kamal Tasin,Executive panel,Vice President (Communication),0
-8,Fyaz Bin Mahmood Arko,Executive panel,Assistant General Secretary (Communication),0
-9,Nanjiba Ibnat,Executive panel,Assistant General Secretary (External Affairs),0
-10,Md. Tasnimul Islam Soumik,Executive panel,Treasurer,0
-11,Salma Sabiha,Executive panel,Deputy Treasurer,0
-12,Moinul Hasan Emon,Executive panel,Joint Secretary (Administration),0
-13,Kasmira Rijvi Liza,Executive panel,Joint Secretary (Communication),0
-14,Chawdhury Ahmed Juhayer,Executive panel,Joint Secretary (External Affairs),0
-15,Ridah Tarannum Mehmood,Executive panel,Documentation Secretary,0
-16,Takrim Bin Hamid,Executive panel,Print Media Secretary,0
-17,Sk. Akib Hossain Sakil,Executive panel,Publication Secretary,0
-18,Mostofa Zaman Kaiser,Executive panel,Organizing Secretary,0
-19,Nusaiba Nawar,Executive panel,Cultural Secretary,0
-20,Adiba Nawrin,Executive panel,Deputy Cultural Secretary,0
-21,Farshid Rahim,Executive panel,Office Secretary,0
-22,Raiyan Sanjana Shupriti,Executive panel,Office Secretary,0
-23,Adib Akhtab,Sub-executive panel,Head,Academics
-24,Golam Zakaria,Sub-executive panel,Deputy Head,Academics
-25,Tazwar Ahmed Jawad,Sub-executive panel,Assistant Head,Academics
-26,Ahnaf Tajwar Evan,Sub-executive panel,Head,Administration
-27,Safa Rahman,Sub-executive panel,Deputy Head,Administration
-28,Mahir Tajwar Rahman,Sub-executive panel,Assistant Head,Administration
-29,Anika Shahreen,Sub-executive panel,Head,Communications
-30,Zarin Subah,Sub-executive panel,Deputy Head,Communications
-31,Asif Abdulah,Sub-executive panel,Assistant Head,Communications
-32,Rakib Hassan Siam,Sub-executive panel,Head,Corporate Affairs
-33,Naveed Abrar,Sub-executive panel,Deputy Head,Corporate Affairs
-34,Naimul Fayek,Sub-executive panel,Assistant Head,Corporate Affairs
-35,Ahnaf Abrar Zaraf,Sub-executive panel,Head,Creative & Graphics
-36,Shadman Shafi,Sub-executive panel,Deputy Head,Creative & Graphics
-37,Atika Asif,Sub-executive panel,Assistant Head,Creative & Graphics
-38,Sifar Mahfuz Adnan,Sub-executive panel,Head,Digital Media
-39,MD. Arif Shahriar Arnob,Sub-executive panel,Deputy Head,Digital Media
-40,Istiaque Zaman Choyon,Sub-executive panel,Assistant Head,Digital Media
-41,Md Ahnaf Tahmid,Sub-executive panel,Head,Documentation
-42,Nafesa Anzum Helaly,Sub-executive panel,Assistant Head,Documentation
-43,Wasee Ahmed Bhuiyan,Sub-executive panel,Head,Operations
-44,Rahmatullah Moon,Sub-executive panel,Deputy Head,Operations
-45,Md Tanvir Islam Faysal,Sub-executive panel,Assistant Head,Operations
-46,Novera Islam,Sub-executive panel,Head,Media & Publications
-47,Maliha Haque,Sub-executive panel,Deputy Head,Media & Publications
-48,Ajmal Tanjim,Sub-executive panel,Assistant Head,Media & Publications
-49,Ishraq Nasim,Sub-executive panel,Head,Logistics
-50,Spandan Islam,Sub-executive panel,Deputy Head,Logistics
-51,MH Ovi,Sub-executive panel,Assistant Head,Logistics
-52,Rad Tahmid,Sub-executive panel,Head,Hospitality
-53,Saima Shohail,Sub-executive panel,Deputy Head,Hospitality
-54,Dipannita Debjani,Sub-executive panel,Assistant Head,Hospitality
-55,Fardina Rabbi,Sub-executive panel,Head,Event Management
-56,Jafir Abedin,Sub-executive panel,Deputy Head,Event Management
-57,Anuva Tarik,Sub-executive panel,Assistant Head,Event Management
-58,Afra Nawar,Sub-executive panel,Head,Public Relations
-59,Abid Bin Ahmad,Sub-executive panel,Deputy Head,Public Relations
-60,Mubassira Rahman,Sub-executive panel,Assistant Head,Public Relations
-61,Zawad Zarir Pasha,Sub-executive panel,Head,Technical Affairs
-62,Md. Asaduzzaman Sohel,Sub-executive panel,Deputy Head,Technical Affairs
-63,Md Abdullah Al Siam,executive member,0,0
-64,Fozayel Mubarak,executive member,0,0
-65,Sahal Hussain,executive member,0,0
-66,Md Mohaimenul Islam Chowdhury ,executive member,0,0
-67,Monjurul Hossain,executive member,0,0
-68,Abrar Faiyaz Noor ,executive member,0,0
-69,Nashia Tahannun Chowdhury ,executive member,0,0
-70,Ahmed Yasar Sameen,executive member,0,0
-71,Lubaba Sadaf Benazir,executive member,0,0
-72,Nazia Hassan ,executive member,0,0
-73,Rafia Tasneem Jyoti ,executive member,0,0
-74,Tanvir Jaman Shwapnil,executive member,0,0
-75,Rakin Ahmed ,executive member,0,0
-76,Aong Haing Mong Marma Sun,executive member,0,0
-77,Suhita Tarannum ,executive member,0,0
-78,Eve Elizabeth Khockshi,executive member,0,0
-79,Rafid Ahsan,executive member,0,0
-80,Tashin Faisal,executive member,0,0
-81,Shah Md. Sahib Raiyan,executive member,0,0
-82,Sadia Saiyara,executive member,0,0
-83,Nurun Nahar Borno,executive member,0,0
-84,Rifah Tasneem,executive member,0,0
-85,MD Farhan Masrur ,executive member,0,0
-86,Samin Mohtadi,executive member,0,0
-87,Shafin Afnan Khan,executive member,0,0
-88,Suhee Karim Chowdhury,executive member,0,0
-89,Sushmoy Saha,executive member,0,0
-90,Md. Fahim Habib,executive member,0,0
-91,Rasheeq Nibrash Ferdous ,executive member,0,0
-92,Sadia Juthi ,executive member,0,0
-93,Arafin Ahmed Neon,executive member,0,0
-94,Aamal Bintay Alam,Executive Member,0,0
-95,Zarifa Tashfiah,general member,0,0
-96,Farhat Ahmed Maahi,general member,0,0
-97,Taneem Bintae Shibbir ,general member,0,0
-98,Mahima Suriya Islam,general member,0,0
-99,Nazifa Saiyara,general member,0,0
-100,Farzana Faiza Asif,general member,0,0
-101,Sanjida Ali,general member,0,0
-102,Md Montasir Monayem Safat,general member,0,0
-103,Zubair Ibne Zaman ,general member,0,0
-104,Md. Ibrahim Anwar,general member,0,0
-105,Waziha Islam Smyrna,general member,0,0
-106,Shadia Islam,general member,0,0
-107,Mustakim Rahman,general member,0,0
-108,Farhan Ahmed,general member,0,0
-109,Syeda Syima Islam,general member,0,0
-110,Azwad Afrik Pasha,general member,0,0
-111,Tahsin Mostofa Adiba,general member,0,0
-112,Jannatul Moua Rathi,general member,0,0
-113,Tanzim Islam Ushan,general member,0,0
-114,Godhulia Dey Adhora,general member,0,0
-115,Maisha Mehjabin,general member,0,0
-116,Khalid Masum ,general member,0,0
-117,Tahzebun Nessa ,general member,0,0
-118,Rajeen Morshed Fida,general member,0,0
-119,Tahmid Rahman,general member,0,0
-120,Nusaiba Arwa,general member,0,0
-121,Ahnaf Muhtasim,general member,0,0
-122,Md Abdullah,general member,0,0
-123,Shehrin Tajrin Haque,general member,0,0
-124,Raisa Haque,general member,0,0
-125,Shihab Haque,general member,0,0
-126,Radia Jahrin Tanisha,general member,0,0
-127,Ishmam Ahbab Mahee,general member,0,0
-128,Afiat Rahman,general member,0,0
-129,Mehedi Hasan Ahad,general member,0,0
-130,Farhat Ahmed Maahi,general member,0,0
-131,Maisha Tasneem ,general member,0,0
-132,Sadia Arif Oishe ,general member,0,0
-133,Farhan Shahid,general member,0,0
-134,Mahin Aleem,general member,0,0
-135,Md Jonaidul Islam ,general member,0,0
-136,Anisha Anjum Asad,general member,0,0
-137,Shamsul Al Amin,general member,0,0
-138,Waziha Islam Smyrna,general member,0,0
-139,Tanisha Tasnuva,general member,0,0
-140,Alif Zahan Prachurja ,general member,0,0
-141,Zubair Ibne Zaman ,general member,0,0
-142,Gazi Mahtab,general member,0,0
-143,Farhat Ahmed Maahi,general member,0,0
+id	photo	Name	Panel	Designation	Department	Fb id	linkedIn id
+	https://drive.google.com/open?id=11dwx51vtDh0MRLsx6wLbGBxU8A6TY68P	Aamal Bintay Alam	general member	0	0	https://www.facebook.com/profile.php?id=100077098899982&mibextid=wwXIfr&mibextid=wwXIfr	https://www.linkedin.com/in/aamal-alam-60b693155
+	https://drive.google.com/open?id=1FZW60y2m7m8rMJJVnYB6y2TRbYfIp-Oj	Zarifa Tashfiah	general member	0	0	https://www.facebook.com/share/19myMDrLaT/?mibextid=wwXIfr	https://www.linkedin.com/in/zarifa-tashfiah-8b469935b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1zJ3jTEoOBJvuDyXv4CCSgXB1H06cuATe	Farhat Ahmed Maahi	general member	0	0	https://www.facebook.com/share/1CQTWUNuAW/?mibextid=wwXIfr	https://www.linkedin.com/in/farhat-ahmed-a0296a356?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1EZyMXvxVqWdckSI8qSA8M9Jc_GMhZ0Ik	Taneem Bintae Shibbir 	general member	0	0	https://www.facebook.com/share/1DFSrCjL2W/	https://www.linkedin.com/in/taneem-bintae-shibbir-247701360?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1w1AHFyuU4WqaM3mqkLVvao-Oo9TVrlR_	Mahima Suriya Islam	general member	0	0	https://www.facebook.com/share/19eqdQ1oZp/?mibextid=wwXIfr	https://www.linkedin.com/in/mahima-suriya-islam-925896304?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1jj6rEJI3Ok0kL6AHd0cN22Iu_SkddE06	Nazifa Saiyara	general member	0	0	https://www.facebook.com/profile.php?id=100046964962189	https://www.linkedin.com/in/nazifa-saiyara-03948a30a/
+	https://drive.google.com/open?id=1kJdsruRiILdCE-K5KmzgXhM0Xv9uwxLb	Farzana Faiza Asif	general member	0	0	https://www.facebook.com/farzana.faiza.asif/	https://www.linkedin.com/in/farzanafaizasif
+	https://drive.google.com/open?id=1YA7-LiDf891fT79lJeq5W7_XIehkOG4f	Sanjida Ali	general member	0	0	https://www.facebook.com/share/195AkDdr6L/	https://www.linkedin.com/in/sanjida-ali-5931ab24b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1l9uXqiXhZGb5Eh_BQmHoP7iFF9HyxNme	Md Montasir Monayem Safat	general member	0	0	https://www.facebook.com/safat02	https://www.linkedin.com/in/md-montasir-monayem-safat-883bb830b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1n-os93S6N280Gxjwv8LWcjWS_P4eZGBH	Zubair Ibne Zaman 	general member	0	0	https://www.facebook.com/share/1BSBWNvn7s/	linkedin.com/in/zubair07
+	https://drive.google.com/open?id=11xcjSOIgEMyAG9kaQq740jHgtnmUNKDl	Md. Ibrahim Anwar	general member	0	0	https://www.facebook.com/ibrahim.anwar.79462/	https://www.linkedin.com/in/ibrahim-anwar/
+	https://drive.google.com/open?id=1qoXcbmWgVzn0v8rgodAihTPt8ODm_84K	Waziha Islam Smyrna	general member	0	0	https://www.facebook.com/share/16VC7UzXoH/?mibextid=wwXIfr	https://www.linkedin.com/in/waziha-islam-921744360?trk=contact-info
+	https://drive.google.com/open?id=14Zh0zVEIW3YFAsNG7P6ZJ62ZRxija1wG	Shadia Islam	general member	0	0	https://www.facebook.com/shadia.islam.7161	www.linkedin.com/in/shadia-islam-689379332
+	https://drive.google.com/open?id=17I618gRWlvBsCibtKI6wM_zvksU7w047	Mustakim Rahman	general member	0	0	https://www.facebook.com/mustakim.rahman.180	www.linkedin.com/in/mustakim-rahman-sahil
+	https://drive.google.com/open?id=1PHjMecouPUu4lUXx9L32x5iYOeg73pWf	Farhan Ahmed	general member	0	0	facebook.com/dysnom1a	https://www.linkedin.com/in/ahmedfarhan109?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1SH2MvD71KRgU1Lb4eiSYNU6avu97TRU4	Syeda Syima Islam	general member	0	0	https://www.facebook.com/syeda.syima	https://www.linkedin.com/in/syeda-syima-islam-bbb896360/
+	https://drive.google.com/open?id=1SMe8f5cWJrfL2C5aS5mvzbGBdoafZwvh	Azwad Afrik Pasha	general member	0	0	https://www.facebook.com/azwad.pasha/	www.linkedin.com/in/azwad-pasha-3139b02a2
+	https://drive.google.com/open?id=1sr_DtiotP1JugdEefRePSmZZ0tr8ETzf	Tahsin Mostofa Adiba	general member	0	0	https://www.facebook.com/share/1Aozmabq2Z/?mibextid=wwXIfr	http://linkedin.com/in/tahsin-adiba-91b572301
+	https://drive.google.com/open?id=1HFuJ7Ni1FnUGYN9-m347qDDaj2VXoGYr	Jannatul Moua Rathi	general member	0	0	https://www.facebook.com/jannatulmoua.rathi?mibextid=ZbWKwL	I don't have any at the moment
+	https://drive.google.com/open?id=1AqDKuh2JT9jV9S5O-ge6yAd2IbIHbeNL	Tanzim Islam Ushan	general member	0	0	https://www.facebook.com/share/1EQxzNqsHK/?mibextid=wwXIfr	https://www.linkedin.com/in/tanzimushan?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=124TDEM358GTO9ymSGK22YNeJaw1cuTxV	Godhulia Dey Adhora	general member	0	0	https://www.facebook.com/godhuliadey.adhora/	https://www.linkedin.com/in/godhuliadeyadhora/
+	https://drive.google.com/open?id=1kBXcRtxjw9WWwPR9UrnY60XrwReuNqwQ	Maisha Mehjabin	general member	0	0	https://www.facebook.com/share/1ACaBrPhQo/?mibextid=wwXIfr	https://www.linkedin.com/in/maisha-mehjabin-34a92334a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1O9QfwdX1LeGPD5BNkh5GWtQIrbAgoOpe	Khalid Masum 	general member	0	0	https://www.facebook.com/share/1Bd3LTCcMm/	https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav
+	https://drive.google.com/open?id=1PhBv9NEuIbGctarVeZTT-47JQ-mQ56BD	Tahzebun Nessa 	general member	0	0	https://www.facebook.com/share/18qBnyaVyJ/	https://www.linkedin.com/in/tahzebun-nessa-756920204?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1s5yEpRCuIKTtmMRCM67XXXQqsgoHoRKU	Rajeen Morshed Fida	general member	0	0	https://www.facebook.com/share/16Eo66RJJj/?mibextid=wwXIfr	https://www.linkedin.com/in/morshed-fida?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=16VLt2Bttlw1O7XTikWYKwc5RZZnpTbbh	Tahmid Rahman	general member	0	0	https://www.facebook.com/rahman.tahmid.581?mibextid=ZbWKwL	https://www.linkedin.com/in/tahmidrahman15?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1xulC28dAzll1Ibxr71qCzJtWHJ2WGp7V	Nusaiba Arwa	general member	0	0	https://www.facebook.com/share/1Md1f1Kvjw/?mibextid=wwXIfr	https://www.linkedin.com/in/nusaiba-arwa-0a092b362?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1sHZZxHZU2BXGVyOb7HUetBouoJVM0sEB	Ahnaf Muhtasim	general member	0	0	https://www.facebook.com/ahnaf.muhtasim2002	https://www.linkedin.com/in/ahnaf-muhtasim-1b4ba0336/
+	https://drive.google.com/open?id=1MyIJ5ueGhfXhQZhM9arGw_0w1n4XCSvL	Md Abdullah	general member	0	0	https://www.facebook.com/abdullah.pptx	https://www.linkedin.com/in/md-abdullah-50445a29a/
+	https://drive.google.com/open?id=1UYSMPoJVgM8mBI-vk44ZtPNygY9azxwG	Shehrin Tajrin Haque	general member	0	0	https://www.facebook.com/share/1CFUgiaqcg/?mibextid=wwXIfr	https://www.linkedin.com/in/shehrin-tajrin-haque-522374343?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1BtrcRJibmyQ_cz2Bp54PFY0bT54VjrAP	Raisa Haque	general member	0	0	https://www.facebook.com/share/19VbnQffQo/?mibextid=wwXIfr	https://www.linkedin.com/in/raisa-haque-8b2717346?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1b3J8krWZ_vlb1rBihqZTrQNG5b_ZyuZ6	Shihab Haque	general member	0	0	https://m.facebook.com/adnansdev22	https://www.linkedin.com/in/shihabhq
+	https://drive.google.com/open?id=1lzhjsXT6QOC_ux2C6lRMXLSl-HF30FIL	Radia Jahrin Tanisha	general member	0	0	https://m.me/Abb0onlZUxe19JzR?hash=1tanisha1&source_id=8585216	https://www.linkedin.com/in/radia-jahrin-tanisha-94a544318?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1oi8yh1WFjCk96YkZrriox02uGoMycG8k	Ishmam Ahbab Mahee	general member	0	0	https://www.facebook.com/i.am.mum.pani	https://www.linkedin.com/in/ishmam-ahbab-18687a192/
+	https://drive.google.com/open?id=10Si1Db3tsLeoqMMPpy-syWaEh1cIRMuQ	Afiat Rahman	general member	0	0	https://www.facebook.com/share/1BTQ2gxtte/?mibextid=wwXIfr	http://linkedin.com/in/afiat-rahman-a0899a1a9
+	https://drive.google.com/open?id=1Oza50Uhb3ahUoxXy_A__7ppHgjaha_Pi	Mehedi Hasan Ahad	general member	0	0	https://www.facebook.com/ah.ad.520	https://www.linkedin.com/in/mehedi-hasan-ahad-22842430a/
+	https://drive.google.com/open?id=1sJOuEMbnaOKjUZ1McpWbriw_nO6eQZPF	Farhat Ahmed Maahi	general member	0	0	https://www.facebook.com/share/1BUoLz8qqM/?mibextid=wwXIfr	https://www.linkedin.com/in/farhat-ahmed-a0296a356?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1MwB5xZ2KdwSk_PTfJZ4hP8rEW3D2q7In	Maisha Tasneem 	general member	0	0	https://www.facebook.com/share/16KvGnWDtL/	Not active 
+	https://drive.google.com/open?id=1V84W7pzLG98ucy0jx5LlvxTcEal-2dVt	Sadia Arif Oishe 	general member	0	0	https://www.facebook.com/share/16UoC5Fx5C/	https://www.linkedin.com/in/sadia-arif-oishe-82ab11364?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1t-LMhd3Tf_IciVgpuyiOvR99ICCyRFjY	Farhan Shahid	general member	0	0	https://www.facebook.com/farhan.shahid.477553	https://www.linkedin.com/in/farhan-shahid-48665623b/
+	https://drive.google.com/open?id=1vSLZmXA67J4-fciXnLg7aXpe4JziV1OY	Mahin Aleem	general member	0	0	https://www.facebook.com/mahin.aleem.16/	https://www.linkedin.com/in/mahinaleem/
+	https://drive.google.com/open?id=1Bv-NgOApA3Gv0s76DUFz8Y6g9Pp2lY6G	Md Jonaidul Islam 	general member	0	0	https://www.facebook.com/mohammad.nashit.2024	N/A
+	https://drive.google.com/open?id=1OnEQUSX3aBhFmkFCyAmIOC_PRgTIB7ly	Anisha Anjum Asad	general member	0	0	https://www.facebook.com/anisha.anjum.asad?mibextid=ZbWKwL	Temporarily Restricted
+	https://drive.google.com/open?id=1Zki1mYhOb99qi-yhDvmI0h-4JJNIcsrF	Shamsul Al Amin	general member	0	0	https://www.facebook.com/shamsul.al.amin.tausif.2024	https://www.linkedin.com/in/shamsul-al-amin-bup/
+	https://drive.google.com/open?id=1qJkuRRslJRcRalBk71l4NdX_jk2QO3om	Waziha Islam Smyrna	general member	0	0	https://www.facebook.com/share/19KdzHd2oM/?mibextid=wwXIfr	https://www.linkedin.com/in/waziha-islam-921744360?trk=contact-info
+	https://drive.google.com/open?id=1fQMWB_nKnojAaQvJtHg3aPKrTM4tsewI	Tanisha Tasnuva	general member	0	0	https://www.facebook.com/tanisha.tasnuva.783355	www.linkedin.com/in/tanishatasnuva
+	https://drive.google.com/open?id=1gJAqU_WfLx0JIoH4a2SH5WdSeVojsjqq	Alif Zahan Prachurja 	general member	0	0	https://www.facebook.com/share/1LXQAbMsyV/	https://www.linkedin.com/in/alif-zahan-prachurja-81309b1a6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1S3PMWucFRsaEj29JDn2rl6-3UQF7Ya4o	Zubair Ibne Zaman 	general member	0	0	https://www.facebook.com/share/1AmLggvnxM/	www.linkedin.com/in/zubair07
+	https://drive.google.com/open?id=1x0NmP-btqzGa7AFfPS1_KpdbtNVqdkOx	Gazi Mahtab	general member	0	0	https://www.facebook.com/share/1A2xCAHySk/	N/A 
+	https://drive.google.com/open?id=1rYZDo4YhKOupjTroKEGE3erfCJ9lZOWr	Farhat Ahmed Maahi	general member	0	0	https://www.facebook.com/share/1KdRyypCh6/?mibextid=wwXIfr	https://www.linkedin.com/in/farhat-ahmed-a0296a356?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1MtFV3NH_bmPvBd9W1Ed_jWJHEAC14mwI	Md Abdullah Al Siam	executive member	0	0	https://www.facebook.com/share/14cgEBPYVC/?mibextid=wwXIfr	https://www.linkedin.com/in/md-abdullah-al-siam?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1-yKgRrDvwrYYnXCU4JCBNQdF8LoSkEiq	Fozayel Mubarak	executive member	0	0	https://www.facebook.com/fozayel.mubarak.mahi/	inkedin.com/in/fozayel-mubarak-mahi-63ab63295/
+	https://drive.google.com/open?id=1Z3ZBvmN5FEU9q5bridAygNa7G6-LpvK6	Sahal Hussain	executive member	0	0	https://www.facebook.com/share/1CBYmqB6Be/	https://www.linkedin.com/in/sahal-hussain-79b761360?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1OFWgVNyBAusOF4fOQ_9SpqyUqhlCFMGN	Md Mohaimenul Islam Chowdhury 	executive member	0	0	facebook.com/mohaimenul.oyon	https://www.linkedin.com/in/mohaimenulchowdhury
+	https://drive.google.com/open?id=1kmsfjhr9Cni0VK9xs9iV5nU5YF4DgAsF	Monjurul Hossain	executive member	0	0	https://www.facebook.com/monjurulhossain.o	https://www.linkedin.com/in/monjurul-hossain/
+	https://drive.google.com/open?id=19ijW7yM7xPFrKULGzSHCjQgQcEAsiWFv	Abrar Faiyaz Noor 	executive member	0	0	https://www.facebook.com/share/1BnKP1UZ63/	https://www.linkedin.com/in/abrar-faiyaz-4a1500363?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1SHGpgkp_eJhg-lHP3GfF1gVVsEdDRnAJ	Nashia Tahannun Chowdhury 	executive member	0	0	https://www.facebook.com/share/18qVEB4Wth/	https://www.linkedin.com/in/nashia-tahannun-838a67288?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1qJykwO8UuRcwVAb15wSaeZwU2xQd9fi8	Ahmed Yasar Sameen	executive member	0	0	https://www.facebook.com/ahmedyasarsameen/	https://www.linkedin.com/in/yasarsameen/
+	https://drive.google.com/open?id=1R3Hn2X_bacdpEsIvYRbvsAbA3e70gT5w	Lubaba Sadaf Benazir	executive member	0	0	https://www.facebook.com/share/16heQFQTZX/?mibextid=wwXIfr	www.linkedin.com/in/lubababenazir
+	https://drive.google.com/open?id=1r0VXErA8hXuNnmrlCZPUlE59juf-fkli	Nazia Hassan 	executive member	0	0	https://www.facebook.com/nazia.hassan.709317?mibextid=ZbWKwL	N/A
+	https://drive.google.com/open?id=1N1y4cRz2Z1OhCD1mLZtS74iYtQiqP_OY	Rafia Tasneem Jyoti 	executive member	0	0	https://www.facebook.com/share/16JYugeCRu/	https://www.linkedin.com/in/rafia-tasneem-271825309?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1gjTomo8v3Uilra2jBEiVYL9BWivh0WUd	Tanvir Jaman Shwapnil	executive member	0	0	facebook.com/shwapniiil	https://www.linkedin.com/in/tanvir-jaman-shwapnil/
+	https://drive.google.com/open?id=1VddSzprICGktGUwFVzbx-TayVsAAB-wT	Rakin Ahmed 	executive member	0	0	https://www.facebook.com/share/1C6U5uwNwk/	https://www.linkedin.com/in/rakin09?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1HW1wNXtxgUeAWHfcSMzz7oueEx_PlMW7	Aong Haing Mong Marma Sun	executive member	0	0	https://www.facebook.com/share/1GPEP1buBR/?mibextid=wwXIfr	https://www.linkedin.com/in/aong-haing-mong-marma-sun-064779286?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1J-Cq04Yodr63ICepBt8jYTl4gUwH5FcR	Suhita Tarannum 	executive member	0	0	https://www.facebook.com/share/18H45hYF2v/?mibextid=wwXIfr	https://www.linkedin.com/in/suhita-tarannum-b323b5288?trk=contact-info
+	https://drive.google.com/open?id=1CcxNUqG0qzCa_x8YT_8iomOn-wHWyppW	Eve Elizabeth Khockshi	executive member	0	0	https://www.facebook.com/share/1J7rHFNnCQ/?mibextid=wwXIfr	https://www.linkedin.com/in/contact-eveelizabethkhockshi?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1v00MsS7urB-eb-259HLzGIRKURs2db2b	Rafid Ahsan	executive member	0	0	https://www.facebook.com/share/1DomDkW6yG/	www.linkedin.com/in/ rafidahsan
+	https://drive.google.com/open?id=1cUT8ww0g0u31RPor8MlcQgzVBCrkwRb1	Tashin Faisal	executive member	0	0	https://www.facebook.com/tashin.faisal.1	https://www.linkedin.com/in/tashin-faisal-06baa8311/
+	https://drive.google.com/open?id=1kdVkhT2hITRsZE8iIdb_D7ok3dF-8g1z	Shah Md. Sahib Raiyan	executive member	0	0	https://www.facebook.com/share/1Ajh8y4W2x/?mibextid=qi2Omg	https://www.linkedin.com/in/sahibraiyan
+	https://drive.google.com/open?id=1GQQrdsHLgSzzdkU2wuAMuHyQKj4CTBe-	Sadia Saiyara	executive member	0	0	https://www.facebook.com/share/1KH18TtH6n/?mibextid=wwXIfr	https://www.linkedin.com/in/sadia-saiyara78?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1UX-pCjKgvAz8ATHa4LTvq4ICIODKsOdL	Nurun Nahar Borno	executive member	0	0	https://www.facebook.com/share/1L6Jg5iSHW/?mibextid=wwXIfr	https://www.linkedin.com/in/nurun-nahar-borno-286452288?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+	https://drive.google.com/open?id=1MxnfFpoCUJcdmZa2pT91C1gnnbYIRZ3a	Rifah Tasneem	executive member	0	0	https://www.facebook.com/rifah.tasneem.39/	https://www.linkedin.com/in/rifah-tasneem-51416b21b/
+	https://drive.google.com/open?id=1D_RVzmdD-gEkzBWepXFlGpFFBM2R-_pn	MD Farhan Masrur 	executive member	0	0	https://www.facebook.com/share/16HEjfar7y/	https://www.linkedin.com/in/md-farhan-masrur-61b70a1a1?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1T646RM6Co23ZERNay3KEU_-BPA6CtwsI	Samin Mohtadi	executive member	0	0	https://www.facebook.com/samin.mohtadi.5	http://linkedin.com/in/samin-mohtadi
+	https://drive.google.com/open?id=19k26eGJxg9bSHWKd6r6PFjBfI3huWkJe	Shafin Afnan Khan	executive member	0	0	https://www.facebook.com/shafin.afnan.khan	https://www.linkedin.com/in/shafinafnan/
+	https://drive.google.com/open?id=1DEEl3GAXKL1OlzxKfSh_GOtz944_ossr	Suhee Karim Chowdhury	executive member	0	0	https://www.facebook.com/suhee.chowdhury	https://www.linkedin.com/in/suhee-karim-chowdhury/
+	https://drive.google.com/open?id=1yPCECJBdi5CASX3mvLBzqt3v6_PfysUi	Sushmoy Saha	executive member	0	0	https://www.facebook.com/sushmoy.saha.23	https://www.linkedin.com/in/sushmoy-saha-b559b8274/
+	https://drive.google.com/open?id=1vMg9o5R7E2tc-HJokrPHzwAOmDMeVZXX	Md. Fahim Habib	executive member	0	0	https://www.facebook.com/fahimhabib19	https://www.linkedin.com/in/fahimhabib1912/
+	https://drive.google.com/open?id=1H41vJNyPuMH8GkclUVwf5uIO5TCBue3-	Rasheeq Nibrash Ferdous 	executive member	0	0	https://www.facebook.com/share/1BpWVLzFDa/	https://www.linkedin.com/in/rasheeq-ferdous-09a359216?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1dBQT3fQ-PqqA-k6favF_saW_Oy83Kenf	Sadia Juthi 	executive member	0	0	https://www.facebook.com/share/1ANwuutmCP/	https://www.linkedin.com/in/sadia-juthi-989a73366?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	https://drive.google.com/open?id=1NYUpBcW5jZvWOfKbROZ_b7qjvnyo4kWH	Arafin Ahmed Neon	executive member	0	0	ahmed.neon06	www.linkedin.com/in/arafin-ahmed-neon
+	0	Adib Akhtab	sub executive panel	Head	Academics	0	0
+	0	Golam Zakaria	sub executive panel	Deputy Head	Academics	0	0
+	0	Tazwar Ahmed Jawad	sub executive panel	Assistant Head	Academics	0	0
+	0	Ahnaf Tajwar Evan	sub executive panel	Head	Administration	0	0
+	0	Safa Rahman	sub executive panel	Deputy Head	Administration	0	0
+	0	Mahir Tajwar Rahman	sub executive panel	Assistant Head	Administration	0	0
+	0	Anika Shahreen	sub executive panel	Head	Communications	0	0
+	0	Zarin Subah	sub executive panel	Deputy Head	Communications	0	0
+	0	Asif Abdulah	sub executive panel	Assistant Head	Communications	0	0
+	0	Rakib Hassan Siam	sub executive panel	Head	Corporate Affairs	https://www.facebook.com/rakib.hassan.siam/	https://www.linkedin.com/in/rakib-hassan-siam/
+	0	Naveed Abrar	sub executive panel	Deputy Head	Corporate Affairs	0	0
+	0	Naimul Fayek	sub executive panel	Assistant Head	Corporate Affairs	0	0
+	0	Ahnaf Abrar Zaraf	sub executive panel	Head	Creative & Graphics	0	0
+	0	Shadman Shafi	sub executive panel	Deputy Head	Creative & Graphics	0	0
+	0	Atika Asif	sub executive panel	Assistant Head	Creative & Graphics	0	0
+	0	Sifar Mahfuz Adnan	sub executive panel	Head	Digital Media	0	0
+	0	MD. Arif Shahriar Arnob	sub executive panel	Deputy Head	Digital Media	0	0
+	0	Istiaque Zaman Choyon	sub executive panel	Assistant Head	Digital Media	https://www.facebook.com/izchoyon/	https://www.linkedin.com/in/izchoyon/
+	0	Md Ahnaf Tahmid	sub executive panel	Head	Documentation	https://www.facebook.com/onlytahmidthings/	https://www.linkedin.com/in/onlytahmidthings/
+	0	Nafesa Anzum Helaly	sub executive panel	Assistant Head	Documentation	0	0
+	0	Wasee Ahmed Bhuiyan	sub executive panel	Head	Operations	https://www.facebook.com/share/1BfH8b5Cx8/	https://www.linkedin.com/in/waseeahmed
+	0	Rahmatullah Moon	sub executive panel	Deputy Head	Operations	0	0
+	0	Md Tanvir Islam Faysal	sub executive panel	Assistant Head	Operations	https://www.facebook.com/Tanvirislam89	https://www.linkedin.com/in/tanvirislam89/
+	0	Novera Islam	sub executive panel	Head	Media & Publications	0	0
+	0	Maliha Haque	sub executive panel	Deputy Head	Media & Publications	0	0
+	0	Ajmal Tanjim	sub executive panel	Assistant Head	Media & Publications	0	0
+	0	Ishraq Nasim	sub executive panel	Head	Logistics	0	0
+	0	Spandan Islam	sub executive panel	Deputy Head	Logistics	0	https://www.linkedin.com/in/md-mazharul-islam-spandan-0a8508246?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	0	MH Ovi	sub executive panel	Assistant Head	Logistics	0	0
+	0	Rad Tahmid	sub executive panel	Head	Hospitality	0	0
+	0	Saima Shohail	sub executive panel	Deputy Head	Hospitality	0	0
+	0	Dipannita Debjani	sub executive panel	Assistant Head	Hospitality	0	0
+	0	Fardina Rabbi	sub executive panel	Head	Event Management	0	0
+	0	Jafir Abedin	sub executive panel	Deputy Head	Event Management	0	0
+	0	Anuva Tarik	sub executive panel	Assistant Head	Event Management	0	0
+	0	Afra Nawar	sub executive panel	Head	Public Relations	0	0
+	0	Abid Bin Ahmad	sub executive panel	Deputy Head	Public Relations	https://www.facebook.com/share/14ztgnfn1EM/	https://www.linkedin.com/in/abid-bin-ahmad-nur?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+	0	Mubassira Rahman	sub executive panel	Assistant Head	Public Relations	0	0
+	0	Zawad Zarir Pasha	sub executive panel	Head	Technical Affairs	0	0
+	0	Md. Asaduzzaman Sohel	sub executive panel	Deputy Head	Technical Affairs	0	0
+	0	Taiseer Ahmed	executive panel	President	0	0	0
+	0	Ahbab Zaiad Rafeed	executive panel	General Secretary	0	0	0
+	0	Md. Nahian Hasan	executive panel	Senior Vice President (Administration)	0	0	0
+	0	Maisha Samiha	executive panel	Senior Vice President (Communication)	0	0	0
+	0	Adiba Nawar Zuberi	executive panel	Senior Vice President (External Affairs)	0	0	0
+	0	Talha Sany	executive panel	Vice President (Administration)	0	0	0
+	0	Nowshad Kamal Tasin	executive panel	Vice President (Communication)	0	0	0
+	0	Fyaz Bin Mahmood Arko	executive panel	Assistant General Secretary (Communication)	0	0	0
+	0	Nanjiba Ibnat	executive panel	Assistant General Secretary (External Affairs)	0	0	0
+	0	Md. Tasnimul Islam Soumik	executive panel	Treasurer	0	0	0
+	0	Salma Sabiha	executive panel	Deputy Treasurer	0	0	0
+	0	Moinul Hasan Emon	executive panel	Joint Secretary (Administration)	0	0	0
+	0	Kasmira Rijvi Liza	executive panel	Joint Secretary (Communication)	0	0	0
+	0	Chawdhury Ahmed Juhayer	executive panel	Joint Secretary (External Affairs)	0	0	0
+	0	Ridah Tarannum Mehmood	executive panel	Documentation Secretary	0	0	0
+	0	Takrim Bin Hamid	executive panel	Print Media Secretary	0	0	0
+	0	Sk. Akib Hossain Sakil	executive panel	Publication Secretary	0	0	0
+	0	Mostofa Zaman Kaiser	executive panel	Organizing Secretary	0	0	0
+	0	Nusaiba Nawar	executive panel	Cultural Secretary	0	0	0
+	0	Adiba Nawrin	executive panel	Deputy Cultural Secretary	0	0	0
+	0	Farshid Rahim	executive panel	Office Secretary	0	0	0
+	0	Raiyan Sanjana Shupriti	executive panel	Office Secretary	0	0	0
+	0	Maryeam Nowshin	senior executive	0	0	0	0
+	0	Rashika Tazreen	senior executive	0	0	0	0
+	0	Mosaddek Hossain Ankur	senior executive	0	0	0	0
+	0	Simran Ahmed	senior executive	0	0	0	0
+	0	Zaheen Tasfia Zuhair	senior executive	0	0	0	0
+	0	Nahiyan Hasan	senior executive	0	0	0	0
+	0	Samrin Rahman	senior executive	0	0	0	0
