@@ -949,12 +949,46 @@ for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
         st.subheader(f"{display_label} Members")
 
         if raw_label == "general member":
+            # for _, row in filtered_df.iterrows():
+            #     cols = st.columns([3, 3, 1])
+            #     cols[0].markdown(f"**Name:** {row.get('Name', 'N/A')}")
+            #     cols[1].markdown(f"**Panel:** {row.get('Panel', 'N/A')}")
+            #     if cols[2].button("Promote", key=f"promote_{row['id']}"):
+            #         promote_member(row["id"])
             for _, row in filtered_df.iterrows():
-                cols = st.columns([3, 3, 1])
-                cols[0].markdown(f"**Name:** {row.get('Name', 'N/A')}")
-                cols[1].markdown(f"**Panel:** {row.get('Panel', 'N/A')}")
-                if cols[2].button("Promote", key=f"promote_{row['id']}"):
-                    promote_member(row["id"])
+                st.markdown("---")
+                cols = st.columns([2, 5, 5])
+
+                # Column 1: Photo
+                with cols[0]:
+                    if pd.notna(row.get("photo")) and str(row["photo"]).startswith("http"):
+                        st.image(row["photo"], width=80)
+                    else:
+                        st.markdown("🖼️ No photo")
+
+                # Column 2: Basic info
+                with cols[1]:
+                    st.markdown(f"**Name:** {row.get('Name', 'N/A')}")
+                    st.markdown(f"**Panel:** {row.get('Panel', 'N/A')}")
+                    st.markdown(f"**Designation:** {row.get('Designation', 'N/A')}")
+                    st.markdown(f"**Department:** {row.get('Department', 'N/A')}")
+
+                # Column 3: Social + Action
+                with cols[2]:
+                    fb = row.get("Fb id", "")
+                    linkedin = row.get("linkedIn id", "")
+                    if pd.notna(fb) and str(fb).strip():
+                        st.markdown(f"[🌐 Facebook](https://facebook.com/{fb})", unsafe_allow_html=True)
+                    if pd.notna(linkedin) and str(linkedin).strip():
+                        st.markdown(f"[🔗 LinkedIn](https://linkedin.com/in/{linkedin})", unsafe_allow_html=True)
+
+                    if raw_label == "general member":
+                        if st.button("Promote", key=f"promote_{row['id']}"):
+                            promote_member(row["id"])
+                    elif raw_label == "executive member":
+                        if st.button("Demote", key=f"demote_{row['id']}"):
+                            demote_member(row["id"])
+
 
         elif raw_label == "executive member":
             for _, row in filtered_df.iterrows():
