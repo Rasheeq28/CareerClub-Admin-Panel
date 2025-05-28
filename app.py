@@ -1038,10 +1038,10 @@ if "Panel" not in df.columns:
 df["Panel"] = df["Panel"].astype(str).str.strip()
 
 panel_labels = {
-    "Executive panel": "Executive Panel",
-    "Sub-executive panel": "Sub-Executive Panel",
-    "executive member": "Executive Member",
-    "general member": "General Member"
+    "Executive panel": "Executive panel",
+    "Sub-executive panel": "Sub-executive panel",
+    "executive member": "executive member",
+    "general member": "general member"
 }
 
 tabs = st.tabs(list(panel_labels.values()))
