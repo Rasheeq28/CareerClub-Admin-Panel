@@ -925,10 +925,10 @@ if "Panel" not in df.columns:
 df["Panel"] = df["Panel"].astype(str).str.strip()
 
 panel_labels = {
-    "Executive panel": "Executive Panel",
-    "Sub-executive panel": "Sub-Executive Panel",
-    "executive member": "Executive Member",
-    "general member": "General Member"
+    "executive panel": "Executive Panel",
+    "sub executive panel": "sub executive panel",
+    "executive member": "executive member",
+    "general member": "general member"
 }
 
 tabs = st.tabs(list(panel_labels.values()))
@@ -965,5 +965,4 @@ for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
                     demote_member(row["id"])
         else:
             st.dataframe(filtered_df.reset_index(drop=True))
-
 
