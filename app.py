@@ -1548,6 +1548,161 @@ import uuid
 #                 add_member(name, panel, department, designation, fb_id, linkedin_id)
 #
 #
+
+# add member
+# import streamlit as st
+# import pandas as pd
+# from supabase import create_client, Client
+# import uuid
+# import time
+#
+# # Supabase config
+# SUPABASE_URL = "https://orjswswziiisbkvwnpye.supabase.co"
+# SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yanN3c3d6aWlpc2JrdnducHllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMjczNDQsImV4cCI6MjA2MzkwMzM0NH0.F2Oe53GzprWjiMYGvxMipplMwE2QeuKRRQI3Zsi7RAM"
+# TABLE_NAME = "cc"
+#
+# supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+#
+# # Fetch existing data
+# def fetch_data():
+#     try:
+#         response = supabase.table(TABLE_NAME).select("*").execute()
+#         return pd.DataFrame(response.data)
+#     except Exception as e:
+#         st.error(f"Error fetching data: {e}")
+#         return pd.DataFrame()
+#
+# # Promote / Demote logic
+# def promote_member(row_id):
+#     try:
+#         row_id = str(row_id)
+#         response = supabase.table(TABLE_NAME).update({
+#             "Panel": "executive member"
+#         }).eq("id", row_id).execute()
+#         if response.data and len(response.data) > 0:
+#             st.success("🎉 Member promoted to Executive Member!")
+#             time.sleep(1)
+#             st.rerun()
+#         else:
+#             st.warning(f"⚠️ Promotion failed — no rows updated. ID: {row_id}")
+#     except Exception as e:
+#         st.error(f"❌ Failed to promote: {e}")
+#
+# def demote_member(row_id):
+#     try:
+#         row_id = str(row_id)
+#         response = supabase.table(TABLE_NAME).update({
+#             "Panel": "general member"
+#         }).eq("id", row_id).execute()
+#         if response.data and len(response.data) > 0:
+#             st.success("👋 Member demoted to General Member.")
+#             time.sleep(1)
+#             st.rerun()
+#         else:
+#             st.warning(f"⚠️ Demotion failed — no rows updated. ID: {row_id}")
+#     except Exception as e:
+#         st.error(f"❌ Failed to demote: {e}")
+#
+# # Add new member
+# def add_member(name, panel, department, designation, fb_id, linkedin_id):
+#     try:
+#         new_id = str(uuid.uuid4())
+#         response = supabase.table(TABLE_NAME).insert({
+#             "id": new_id,
+#             "Name": name,
+#             "Panel": panel,
+#             "Department": department,
+#             "Designation": designation,
+#             "fb id": fb_id,
+#             "linkedin id": linkedin_id
+#         }).execute()
+#
+#         if response.data and len(response.data) > 0:
+#             st.success("✅ New member added successfully!")
+#             time.sleep(1)
+#             st.rerun()
+#         else:
+#             st.warning("⚠️ Member insertion failed.")
+#     except Exception as e:
+#         st.error(f"❌ Failed to add member: {e}")
+#
+#
+# # Load and validate data
+# df = fetch_data()
+#
+# if "Panel" not in df.columns:
+#     st.error("Missing 'Panel' column.")
+#     st.stop()
+#
+# df["Panel"] = df["Panel"].astype(str).str.strip()
+#
+# # Tabs
+# panel_labels = {
+#     "Executive panel": "Executive Panel",
+#     "Sub-executive panel": "Sub-Executive Panel",
+#     "executive member": "Executive Member",
+#     "general member": "General Member"
+# }
+#
+# tabs = st.tabs(list(panel_labels.values()) + ["➕ Add Member"])
+#
+# # Existing panel tabs
+# for tab, (raw_label, display_label) in zip(tabs[:-1], panel_labels.items()):
+#     with tab:
+#         panel_df = df[df["Panel"] == raw_label]
+#
+#         if panel_df.empty:
+#             st.info(f"No members in {display_label}.")
+#             continue
+#
+#         def is_all_zero(series):
+#             return ((series.astype(str).str.strip() == "0") | (series == 0)).all()
+#
+#         filtered_df = panel_df.loc[:, ~panel_df.apply(is_all_zero)]
+#
+#         st.subheader(f"{display_label} Members")
+#
+#         for _, row in filtered_df.iterrows():
+#             with st.container():
+#                 st.markdown(
+#                     f"""
+#                     **Name:** {row.get('Name', 'N/A')}
+#                     **Panel:** {row.get('Panel', 'N/A')}
+#                     **Department:** {row.get('Department', 'N/A')}
+#                     **Designation:** {row.get('Designation', 'N/A')}
+#                     **FB ID:** {row.get('FB ID', 'N/A')}
+#                     **LinkedIn ID:** {row.get('LinkedIn ID', 'N/A')}
+#                     """
+#                 )
+#                 if raw_label == "general member":
+#                     if st.button("🎯 Promote to Executive", key=f"promote_{row['id']}"):
+#                         promote_member(row["id"])
+#                 elif raw_label == "executive member":
+#                     if st.button("↩️ Demote to General", key=f"demote_{row['id']}"):
+#                         demote_member(row["id"])
+#                 st.markdown("---")
+#
+# # Add Member Tab
+# with tabs[-1]:
+#     st.subheader("➕ Add New Member")
+#
+#     with st.form("add_member_form"):
+#         name = st.text_input("Name")
+#         panel = st.selectbox("Panel", list(panel_labels.keys()))
+#         department = st.text_input("Department")
+#         designation = st.text_input("Designation")
+#         fb_id = st.text_input("Facebook ID")
+#         linkedin_id = st.text_input("LinkedIn ID")
+#
+#         submitted = st.form_submit_button("Add Member")
+#
+#         if submitted:
+#             if not name:
+#                 st.warning("⚠️ Name is required.")
+#             else:
+#                 add_member(name, panel, department, designation, fb_id, linkedin_id)
+
+
 import streamlit as st
 import pandas as pd
 from supabase import create_client, Client
@@ -1573,31 +1728,25 @@ def fetch_data():
 # Promote / Demote logic
 def promote_member(row_id):
     try:
-        row_id = str(row_id)
         response = supabase.table(TABLE_NAME).update({
             "Panel": "executive member"
-        }).eq("id", row_id).execute()
-        if response.data and len(response.data) > 0:
+        }).eq("id", str(row_id)).execute()
+        if response.data:
             st.success("🎉 Member promoted to Executive Member!")
             time.sleep(1)
             st.rerun()
-        else:
-            st.warning(f"⚠️ Promotion failed — no rows updated. ID: {row_id}")
     except Exception as e:
         st.error(f"❌ Failed to promote: {e}")
 
 def demote_member(row_id):
     try:
-        row_id = str(row_id)
         response = supabase.table(TABLE_NAME).update({
             "Panel": "general member"
-        }).eq("id", row_id).execute()
-        if response.data and len(response.data) > 0:
+        }).eq("id", str(row_id)).execute()
+        if response.data:
             st.success("👋 Member demoted to General Member.")
             time.sleep(1)
             st.rerun()
-        else:
-            st.warning(f"⚠️ Demotion failed — no rows updated. ID: {row_id}")
     except Exception as e:
         st.error(f"❌ Failed to demote: {e}")
 
@@ -1614,27 +1763,33 @@ def add_member(name, panel, department, designation, fb_id, linkedin_id):
             "fb id": fb_id,
             "linkedin id": linkedin_id
         }).execute()
-
-        if response.data and len(response.data) > 0:
+        if response.data:
             st.success("✅ New member added successfully!")
             time.sleep(1)
             st.rerun()
-        else:
-            st.warning("⚠️ Member insertion failed.")
     except Exception as e:
         st.error(f"❌ Failed to add member: {e}")
 
+# Delete member by ID
+def delete_member(row_id):
+    try:
+        response = supabase.table(TABLE_NAME).delete().eq("id", str(row_id)).execute()
+        if response.data:
+            st.success("🗑️ Member deleted successfully!")
+            time.sleep(1)
+            st.rerun()
+    except Exception as e:
+        st.error(f"❌ Failed to delete member: {e}")
 
-# Load and validate data
+# Load data
 df = fetch_data()
-
 if "Panel" not in df.columns:
     st.error("Missing 'Panel' column.")
     st.stop()
 
 df["Panel"] = df["Panel"].astype(str).str.strip()
 
-# Tabs
+# Panel Labels
 panel_labels = {
     "Executive panel": "Executive Panel",
     "Sub-executive panel": "Sub-Executive Panel",
@@ -1642,13 +1797,12 @@ panel_labels = {
     "general member": "General Member"
 }
 
-tabs = st.tabs(list(panel_labels.values()) + ["➕ Add Member"])
+tabs = st.tabs(list(panel_labels.values()) + ["➕ Add Member", "🗑️ Delete Member"])
 
-# Existing panel tabs
-for tab, (raw_label, display_label) in zip(tabs[:-1], panel_labels.items()):
+# View Members Tabs
+for tab, (raw_label, display_label) in zip(tabs[:-2], panel_labels.items()):
     with tab:
         panel_df = df[df["Panel"] == raw_label]
-
         if panel_df.empty:
             st.info(f"No members in {display_label}.")
             continue
@@ -1659,7 +1813,6 @@ for tab, (raw_label, display_label) in zip(tabs[:-1], panel_labels.items()):
         filtered_df = panel_df.loc[:, ~panel_df.apply(is_all_zero)]
 
         st.subheader(f"{display_label} Members")
-
         for _, row in filtered_df.iterrows():
             with st.container():
                 st.markdown(
@@ -1668,8 +1821,8 @@ for tab, (raw_label, display_label) in zip(tabs[:-1], panel_labels.items()):
                     **Panel:** {row.get('Panel', 'N/A')}  
                     **Department:** {row.get('Department', 'N/A')}  
                     **Designation:** {row.get('Designation', 'N/A')}  
-                    **FB ID:** {row.get('FB ID', 'N/A')}  
-                    **LinkedIn ID:** {row.get('LinkedIn ID', 'N/A')}
+                    **FB ID:** {row.get('fb id', 'N/A')}  
+                    **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
                     """
                 )
                 if raw_label == "general member":
@@ -1681,9 +1834,8 @@ for tab, (raw_label, display_label) in zip(tabs[:-1], panel_labels.items()):
                 st.markdown("---")
 
 # Add Member Tab
-with tabs[-1]:
+with tabs[-2]:
     st.subheader("➕ Add New Member")
-
     with st.form("add_member_form"):
         name = st.text_input("Name")
         panel = st.selectbox("Panel", list(panel_labels.keys()))
@@ -1693,9 +1845,31 @@ with tabs[-1]:
         linkedin_id = st.text_input("LinkedIn ID")
 
         submitted = st.form_submit_button("Add Member")
-
         if submitted:
             if not name:
                 st.warning("⚠️ Name is required.")
             else:
                 add_member(name, panel, department, designation, fb_id, linkedin_id)
+
+# Delete Member Tab
+with tabs[-1]:
+    st.subheader("🗑️ Delete Member")
+    search_name = st.text_input("Search by Name")
+    if search_name:
+        filtered = df[df["Name"].str.contains(search_name, case=False, na=False)]
+
+        if filtered.empty:
+            st.info("No matching members found.")
+        else:
+            for _, row in filtered.iterrows():
+                with st.container():
+                    st.markdown(
+                        f"""
+                        **Name:** {row.get('Name', 'N/A')}  
+                        **Panel:** {row.get('Panel', 'N/A')}  
+                        **Department:** {row.get('Department', 'N/A')}  
+                        **Designation:** {row.get('Designation', 'N/A')}
+                        """
+                    )
+                    if st.button("🗑️ Delete", key=f"delete_{row['id']}"):
+                        delete_member(row["id"])
