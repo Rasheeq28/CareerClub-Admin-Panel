@@ -1157,8 +1157,8 @@ for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
                 if raw_label == "general member":
                     if cols[1].button("Promote", key=f"promote_{row['id']}"):
                         promote_member(row["id"])
-                        st.experimental_rerun()
+                        st.info("Please refresh the page to see updates.")
                 elif raw_label == "executive member":
                     if cols[1].button("Demote", key=f"demote_{row['id']}"):
                         demote_member(row["id"])
-                        st.experimental_rerun()
+                        st.info("Please refresh the page to see updates.")
