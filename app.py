@@ -863,108 +863,108 @@ import uuid
 #
 
 # demote exec to gen
-# import streamlit as st
-# import pandas as pd
-# from supabase import create_client, Client
-# import time
-#
-# # Supabase config
-# SUPABASE_URL = "https://orjswswziiisbkvwnpye.supabase.co"
-# SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yanN3c3d6aWlpc2JrdnducHllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMjczNDQsImV4cCI6MjA2MzkwMzM0NH0.F2Oe53GzprWjiMYGvxMipplMwE2QeuKRRQI3Zsi7RAM"
-# TABLE_NAME = "cc"
-#
-# supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-#
-# def fetch_data():
-#     try:
-#         response = supabase.table(TABLE_NAME).select("*").execute()
-#         return pd.DataFrame(response.data)
-#     except Exception as e:
-#         st.error(f"Error fetching data: {e}")
-#         return pd.DataFrame()
-#
-# def promote_member(row_id):
-#     try:
-#         row_id = str(row_id)
-#         response = supabase.table(TABLE_NAME).update({
-#             "Panel": "executive member"
-#         }).eq("id", row_id).execute()
-#
-#         if response.data and len(response.data) > 0:
-#             st.success("🎉 Member promoted to Executive Member!")
-#             time.sleep(1)
-#             st.rerun()
-#         else:
-#             st.warning(f"⚠️ Promotion failed — no rows updated. ID: {row_id}")
-#     except Exception as e:
-#         st.error(f"❌ Failed to promote: {e}")
-#
-# def demote_member(row_id):
-#     try:
-#         row_id = str(row_id)
-#         response = supabase.table(TABLE_NAME).update({
-#             "Panel": "general member"
-#         }).eq("id", row_id).execute()
-#
-#         if response.data and len(response.data) > 0:
-#             st.success("👋 Member demoted to General Member.")
-#             time.sleep(1)
-#             st.rerun()
-#         else:
-#             st.warning(f"⚠️ Demotion failed — no rows updated. ID: {row_id}")
-#     except Exception as e:
-#         st.error(f"❌ Failed to demote: {e}")
-#
-# # Fetch data
-# df = fetch_data()
-#
-# if "Panel" not in df.columns:
-#     st.error("Missing 'Panel' column.")
-#     st.stop()
-#
-# df["Panel"] = df["Panel"].astype(str).str.strip()
-#
-# panel_labels = {
-#     "Executive panel": "Executive Panel",
-#     "Sub-executive panel": "Sub-Executive Panel",
-#     "executive member": "Executive Member",
-#     "general member": "General Member"
-# }
-#
-# tabs = st.tabs(list(panel_labels.values()))
-#
-# for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
-#     with tab:
-#         panel_df = df[df["Panel"] == raw_label]
-#
-#         if panel_df.empty:
-#             st.info(f"No members in {display_label}.")
-#             continue
-#
-#         def is_all_zero(series):
-#             return ((series.astype(str).str.strip() == "0") | (series == 0)).all()
-#
-#         filtered_df = panel_df.loc[:, ~panel_df.apply(is_all_zero)]
-#
-#         st.subheader(f"{display_label} Members")
-#
-#         if raw_label == "general member":
-#             for _, row in filtered_df.iterrows():
-#                 cols = st.columns([3, 3, 1])
-#                 cols[0].markdown(f"**Name:** {row.get('Name', 'N/A')}")
-#                 cols[1].markdown(f"**Panel:** {row.get('Panel', 'N/A')}")
-#                 if cols[2].button("Promote", key=f"promote_{row['id']}"):
-#                     promote_member(row["id"])
-#
-#         elif raw_label == "executive member":
-#             for _, row in filtered_df.iterrows():
-#                 cols = st.columns([3, 3, 1])
-#                 cols[0].markdown(f"**Name:** {row.get('Name', 'N/A')}")
-#                 cols[1].markdown(f"**Panel:** {row.get('Panel', 'N/A')}")
-#                 if cols[2].button("Demote", key=f"demote_{row['id']}"):
-#                     demote_member(row["id"])
-#         else:
-#             st.dataframe(filtered_df.reset_index(drop=True))
+import streamlit as st
+import pandas as pd
+from supabase import create_client, Client
+import time
+
+# Supabase config
+SUPABASE_URL = "https://orjswswziiisbkvwnpye.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yanN3c3d6aWlpc2JrdnducHllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMjczNDQsImV4cCI6MjA2MzkwMzM0NH0.F2Oe53GzprWjiMYGvxMipplMwE2QeuKRRQI3Zsi7RAM"
+TABLE_NAME = "cc"
+
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+def fetch_data():
+    try:
+        response = supabase.table(TABLE_NAME).select("*").execute()
+        return pd.DataFrame(response.data)
+    except Exception as e:
+        st.error(f"Error fetching data: {e}")
+        return pd.DataFrame()
+
+def promote_member(row_id):
+    try:
+        row_id = str(row_id)
+        response = supabase.table(TABLE_NAME).update({
+            "Panel": "executive member"
+        }).eq("id", row_id).execute()
+
+        if response.data and len(response.data) > 0:
+            st.success("🎉 Member promoted to Executive Member!")
+            time.sleep(1)
+            st.rerun()
+        else:
+            st.warning(f"⚠️ Promotion failed — no rows updated. ID: {row_id}")
+    except Exception as e:
+        st.error(f"❌ Failed to promote: {e}")
+
+def demote_member(row_id):
+    try:
+        row_id = str(row_id)
+        response = supabase.table(TABLE_NAME).update({
+            "Panel": "general member"
+        }).eq("id", row_id).execute()
+
+        if response.data and len(response.data) > 0:
+            st.success("👋 Member demoted to General Member.")
+            time.sleep(1)
+            st.rerun()
+        else:
+            st.warning(f"⚠️ Demotion failed — no rows updated. ID: {row_id}")
+    except Exception as e:
+        st.error(f"❌ Failed to demote: {e}")
+
+# Fetch data
+df = fetch_data()
+
+if "Panel" not in df.columns:
+    st.error("Missing 'Panel' column.")
+    st.stop()
+
+df["Panel"] = df["Panel"].astype(str).str.strip()
+
+panel_labels = {
+    "Executive panel": "Executive Panel",
+    "Sub-executive panel": "Sub-Executive Panel",
+    "executive member": "Executive Member",
+    "general member": "General Member"
+}
+
+tabs = st.tabs(list(panel_labels.values()))
+
+for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
+    with tab:
+        panel_df = df[df["Panel"] == raw_label]
+
+        if panel_df.empty:
+            st.info(f"No members in {display_label}.")
+            continue
+
+        def is_all_zero(series):
+            return ((series.astype(str).str.strip() == "0") | (series == 0)).all()
+
+        filtered_df = panel_df.loc[:, ~panel_df.apply(is_all_zero)]
+
+        st.subheader(f"{display_label} Members")
+
+        if raw_label == "general member":
+            for _, row in filtered_df.iterrows():
+                cols = st.columns([3, 3, 1])
+                cols[0].markdown(f"**Name:** {row.get('Name', 'N/A')}")
+                cols[1].markdown(f"**Panel:** {row.get('Panel', 'N/A')}")
+                if cols[2].button("Promote", key=f"promote_{row['id']}"):
+                    promote_member(row["id"])
+
+        elif raw_label == "executive member":
+            for _, row in filtered_df.iterrows():
+                cols = st.columns([3, 3, 1])
+                cols[0].markdown(f"**Name:** {row.get('Name', 'N/A')}")
+                cols[1].markdown(f"**Panel:** {row.get('Panel', 'N/A')}")
+                if cols[2].button("Demote", key=f"demote_{row['id']}"):
+                    demote_member(row["id"])
+        else:
+            st.dataframe(filtered_df.reset_index(drop=True))
 
 
 # linkedin fb
@@ -1162,97 +1162,97 @@ import uuid
 #                     if cols[1].button("Demote", key=f"demote_{row['id']}"):
 #                         demote_member(row["id"])
 #                         st.info("Please refresh the page to see updates.")
-import streamlit as st
-import pandas as pd
-from supabase import create_client, Client
-
-# Supabase config
-SUPABASE_URL = "https://orjswswziiisbkvwnpye.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yanN3c3d6aWlpc2JrdnducHllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMjczNDQsImV4cCI6MjA2MzkwMzM0NH0.F2Oe53GzprWjiMYGvxMipplMwE2QeuKRRQI3Zsi7RAM"
-TABLE_NAME = "cc"
-
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-
-def fetch_data():
-    try:
-        response = supabase.table(TABLE_NAME).select("*").execute()
-        return pd.DataFrame(response.data)
-    except Exception as e:
-        st.error(f"Error fetching data: {e}")
-        return pd.DataFrame()
-
-def promote_member(row_id):
-    row_id = str(row_id)
-    response = supabase.table(TABLE_NAME).update({"Panel": "executive member"}).eq("id", row_id).execute()
-    if response.data and len(response.data) > 0:
-        st.success("🎉 Member promoted to Executive Member!")
-        st.session_state['needs_refresh'] = True
-    else:
-        st.warning(f"⚠️ Promotion failed — no rows updated. ID: {row_id}")
-
-def demote_member(row_id):
-    row_id = str(row_id)
-    response = supabase.table(TABLE_NAME).update({"Panel": "general member"}).eq("id", row_id).execute()
-    if response.data and len(response.data) > 0:
-        st.success("👋 Member demoted to General Member.")
-        st.session_state['needs_refresh'] = True
-    else:
-        st.warning(f"⚠️ Demotion failed — no rows updated. ID: {row_id}")
-
-# Initialize flag
-if 'needs_refresh' not in st.session_state:
-    st.session_state['needs_refresh'] = False
-
-# Your UI and button logic here...
-
-# After all UI code but still top-level:
-if st.session_state['needs_refresh']:
-    st.session_state['needs_refresh'] = False
-    st.experimental_rerun()
-
-
-# Fetch data
-df = fetch_data()
-
-if "Panel" not in df.columns:
-    st.error("Missing 'Panel' column.")
-    st.stop()
-
-df["Panel"] = df["Panel"].astype(str).str.strip()
-
-panel_labels = {
-    "Executive panel": "Executive Panel",
-    "Sub-executive panel": "Sub-Executive Panel",
-    "executive member": "Executive Member",
-    "general member": "General Member"
-}
-
-tabs = st.tabs(list(panel_labels.values()))
-
-for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
-    with tab:
-        panel_df = df[df["Panel"] == raw_label]
-
-        if panel_df.empty:
-            st.info(f"No members in {display_label}.")
-            continue
-
-        display_cols = ["Name", "Panel", "fb id", "linkedin id"]
-
-        st.subheader(f"{display_label} Members")
-
-        # Show data table
-        st.dataframe(panel_df[display_cols].reset_index(drop=True))
-
-        # Buttons only for general/executive members
-        if raw_label in ["general member", "executive member"]:
-            st.markdown("---")
-            for idx, row in panel_df.iterrows():
-                cols = st.columns([4, 1])
-                cols[0].markdown(f"**{row['Name']}**")
-                if raw_label == "general member":
-                    if cols[1].button("Promote", key=f"promote_{row['id']}"):
-                        promote_member(row["id"])
-                elif raw_label == "executive member":
-                    if cols[1].button("Demote", key=f"demote_{row['id']}"):
-                        demote_member(row["id"])
+# import streamlit as st
+# import pandas as pd
+# from supabase import create_client, Client
+#
+# # Supabase config
+# SUPABASE_URL = "https://orjswswziiisbkvwnpye.supabase.co"
+# SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yanN3c3d6aWlpc2JrdnducHllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMjczNDQsImV4cCI6MjA2MzkwMzM0NH0.F2Oe53GzprWjiMYGvxMipplMwE2QeuKRRQI3Zsi7RAM"
+# TABLE_NAME = "cc"
+#
+# supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+#
+# def fetch_data():
+#     try:
+#         response = supabase.table(TABLE_NAME).select("*").execute()
+#         return pd.DataFrame(response.data)
+#     except Exception as e:
+#         st.error(f"Error fetching data: {e}")
+#         return pd.DataFrame()
+#
+# def promote_member(row_id):
+#     row_id = str(row_id)
+#     response = supabase.table(TABLE_NAME).update({"Panel": "executive member"}).eq("id", row_id).execute()
+#     if response.data and len(response.data) > 0:
+#         st.success("🎉 Member promoted to Executive Member!")
+#         st.session_state['needs_refresh'] = True
+#     else:
+#         st.warning(f"⚠️ Promotion failed — no rows updated. ID: {row_id}")
+#
+# def demote_member(row_id):
+#     row_id = str(row_id)
+#     response = supabase.table(TABLE_NAME).update({"Panel": "general member"}).eq("id", row_id).execute()
+#     if response.data and len(response.data) > 0:
+#         st.success("👋 Member demoted to General Member.")
+#         st.session_state['needs_refresh'] = True
+#     else:
+#         st.warning(f"⚠️ Demotion failed — no rows updated. ID: {row_id}")
+#
+# # Initialize flag
+# if 'needs_refresh' not in st.session_state:
+#     st.session_state['needs_refresh'] = False
+#
+# # Your UI and button logic here...
+#
+# # After all UI code but still top-level:
+# if st.session_state['needs_refresh']:
+#     st.session_state['needs_refresh'] = False
+#     st.experimental_rerun()
+#
+#
+# # Fetch data
+# df = fetch_data()
+#
+# if "Panel" not in df.columns:
+#     st.error("Missing 'Panel' column.")
+#     st.stop()
+#
+# df["Panel"] = df["Panel"].astype(str).str.strip()
+#
+# panel_labels = {
+#     "Executive panel": "Executive Panel",
+#     "Sub-executive panel": "Sub-Executive Panel",
+#     "executive member": "Executive Member",
+#     "general member": "General Member"
+# }
+#
+# tabs = st.tabs(list(panel_labels.values()))
+#
+# for tab, (raw_label, display_label) in zip(tabs, panel_labels.items()):
+#     with tab:
+#         panel_df = df[df["Panel"] == raw_label]
+#
+#         if panel_df.empty:
+#             st.info(f"No members in {display_label}.")
+#             continue
+#
+#         display_cols = ["Name", "Panel", "fb id", "linkedin id"]
+#
+#         st.subheader(f"{display_label} Members")
+#
+#         # Show data table
+#         st.dataframe(panel_df[display_cols].reset_index(drop=True))
+#
+#         # Buttons only for general/executive members
+#         if raw_label in ["general member", "executive member"]:
+#             st.markdown("---")
+#             for idx, row in panel_df.iterrows():
+#                 cols = st.columns([4, 1])
+#                 cols[0].markdown(f"**{row['Name']}**")
+#                 if raw_label == "general member":
+#                     if cols[1].button("Promote", key=f"promote_{row['id']}"):
+#                         promote_member(row["id"])
+#                 elif raw_label == "executive member":
+#                     if cols[1].button("Demote", key=f"demote_{row['id']}"):
+#                         demote_member(row["id"])
