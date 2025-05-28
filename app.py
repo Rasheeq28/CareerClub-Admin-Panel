@@ -1611,8 +1611,8 @@ def add_member(name, panel, department, designation, fb_id, linkedin_id):
             "Panel": panel,
             "Department": department,
             "Designation": designation,
-            "FB ID": fb_id,
-            "LinkedIn ID": linkedin_id
+            "fb id": fb_id,
+            "linkedin id": linkedin_id
         }).execute()
 
         if response.data and len(response.data) > 0:
@@ -1623,6 +1623,7 @@ def add_member(name, panel, department, designation, fb_id, linkedin_id):
             st.warning("⚠️ Member insertion failed.")
     except Exception as e:
         st.error(f"❌ Failed to add member: {e}")
+
 
 # Load and validate data
 df = fetch_data()
