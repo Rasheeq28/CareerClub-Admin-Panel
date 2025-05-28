@@ -1502,8 +1502,8 @@ for tab, (raw_label, display_label) in zip(tabs[:-1], panel_labels.items()):
                         f"""
                         **Name:** {row.get('Name', 'N/A')}  
                         **Panel:** {row.get('Panel', 'N/A')}  
-                        **FB ID:** {row.get('fb id', 'N/A')}  
-                        **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
+                        **FB ID:** {row.get('FB ID', 'N/A')}  
+                        **LinkedIn ID:** {row.get('LinkedIn ID', 'N/A')}
                         """
                     )
                     if st.button("🎯 Promote to Executive", key=f"promote_{row['id']}"):
@@ -1517,8 +1517,8 @@ for tab, (raw_label, display_label) in zip(tabs[:-1], panel_labels.items()):
                         f"""
                         **Name:** {row.get('Name', 'N/A')}  
                         **Panel:** {row.get('Panel', 'N/A')}  
-                        **FB ID:** {row.get('fb id', 'N/A')}  
-                        **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
+                        **FB ID:** {row.get('FB ID', 'N/A')}  
+                        **LinkedIn ID:** {row.get('LinkedIn ID', 'N/A')}
                         """
                     )
                     if st.button("↩️ Demote to General", key=f"demote_{row['id']}"):
