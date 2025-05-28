@@ -1447,8 +1447,8 @@ def add_member(name, panel, department, designation, fb_id, linkedin_id):
             "Panel": panel,
             "Department": department,
             "Designation": designation,
-            "FB ID": fb_id,
-            "LinkedIn ID": linkedin_id
+            "fb id": fb_id,
+            "linkedin id": linkedin_id
         }).execute()
 
         if response.data and len(response.data) > 0:
