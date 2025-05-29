@@ -1919,7 +1919,7 @@ import time
 SUPABASE_URL = "https://orjswswziiisbkvwnpye.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yanN3c3d6aWlpc2JrdnducHllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMjczNDQsImV4cCI6MjA2MzkwMzM0NH0.F2Oe53GzprWjiMYGvxMipplMwE2QeuKRRQI3Zsi7RAM"
   # Replace with your actual key
-TABLE_NAME = "cc-final"
+TABLE_NAME = "cc"
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
@@ -1927,10 +1927,24 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 def fetch_data():
     try:
         response = supabase.table(TABLE_NAME).select("*").execute()
-        return pd.DataFrame(response.data)
+        df = pd.DataFrame(response.data)
+        # Normalize columns (optional: you can also just rename the required ones)
+        df.columns = df.columns.str.strip()  # remove whitespace
+        df.rename(columns={
+            "panel": "Panel",
+            "name": "Name",
+            "department": "Department",
+            "designation": "Designation",
+            "fb id": "fb id",
+            "linkedin id": "linkedin id",
+            "photo": "photo",
+            "id": "id"
+        }, inplace=True)
+        return df
     except Exception as e:
         st.error(f"Error fetching data: {e}")
         return pd.DataFrame()
+
 
 # Add member
 def add_member(name, panel, department, designation, fb_id, linkedin_id, photo_url):
@@ -1942,8 +1956,8 @@ def add_member(name, panel, department, designation, fb_id, linkedin_id, photo_u
             "Panel": panel,
             "Department": department,
             "Designation": designation,
-            "Fb id": fb_id,
-            "linkedIn id": linkedin_id,
+            "fb id": fb_id,
+            "linkedin id": linkedin_id,
             "photo": photo_url
         }).execute()
         if response.data:
@@ -1972,8 +1986,8 @@ def update_member(row_id, name, panel, department, designation, fb_id, linkedin_
             "Panel": panel,
             "Department": department,
             "Designation": designation,
-            "Fb id": fb_id,
-            "linkedIn id": linkedin_id,
+            "fb id": fb_id,
+            "linkedin id": linkedin_id,
             "photo": photo_url
         }).eq("id", str(row_id)).execute()
         if response.data:
@@ -2021,15 +2035,7 @@ for tab, (raw_label, display_label) in zip(tabs[:-3], panel_labels.items()):
                 with cols[0]:
                     photo_url = row.get("photo", "")
                     if photo_url and photo_url.strip().lower() != "n/a":
-                        photo_url = row.get("photo", "")
-                        if photo_url and photo_url.strip().lower() != "n/a" and photo_url.startswith("http"):
-                            try:
-                                st.image(photo_url, width=100)
-                            except Exception as e:
-                                st.warning("⚠️ Failed to load image.")
-                        else:
-                            st.markdown("🚫 No Photo")
-
+                        st.image(photo_url, width=100)
                     else:
                         st.markdown("🚫 No Photo")
 
@@ -2040,8 +2046,8 @@ for tab, (raw_label, display_label) in zip(tabs[:-3], panel_labels.items()):
                         **Panel:** {row.get('Panel', 'N/A')}  
                         **Department:** {row.get('Department', 'N/A')}  
                         **Designation:** {row.get('Designation', 'N/A')}  
-                        **FB ID:** {row.get('Fb id', 'N/A')}  
-                        **LinkedIn ID:** {row.get('linkedIn id', 'N/A')}
+                        **FB ID:** {row.get('fb id', 'N/A')}  
+                        **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
                         """
                     )
 
@@ -2055,7 +2061,7 @@ with tabs[-3]:
         department = st.text_input("Department")
         designation = st.text_input("Designation")
         fb_id = st.text_input("Facebook ID")
-        linkedin_id = st.text_input("linkedIn ID")
+        linkedin_id = st.text_input("LinkedIn ID")
         photo_url = st.text_input("Photo URL (optional)")
 
         submitted = st.form_submit_button("Add Member")
@@ -2081,8 +2087,8 @@ with tabs[-2]:
                     panel = st.selectbox("Panel", list(panel_labels.keys()), index=list(panel_labels.keys()).index(row["Panel"]))
                     department = st.text_input("Department", value=row.get("Department", ""))
                     designation = st.text_input("Designation", value=row.get("Designation", ""))
-                    fb_id = st.text_input("Facebook ID", value=row.get("Fb id", ""))
-                    linkedin_id = st.text_input("LinkedIn ID", value=row.get("linkedIn id", ""))
+                    fb_id = st.text_input("Facebook ID", value=row.get("fb id", ""))
+                    linkedin_id = st.text_input("LinkedIn ID", value=row.get("linkedin id", ""))
                     photo_url = st.text_input("Photo URL", value=row.get("photo", ""))
 
                     submitted = st.form_submit_button("Update Member")
@@ -2105,15 +2111,7 @@ with tabs[-1]:
                     with cols[0]:
                         photo_url = row.get("photo", "")
                         if photo_url and photo_url.strip().lower() != "n/a":
-                            photo_url = row.get("photo", "")
-                            if photo_url and photo_url.strip().lower() != "n/a" and photo_url.startswith("http"):
-                                try:
-                                    st.image(photo_url, width=100)
-                                except Exception as e:
-                                    st.warning("⚠️ Failed to load image.")
-                            else:
-                                st.markdown("🚫 No Photo")
-
+                            st.image(photo_url, width=100)
                         else:
                             st.markdown("🚫 No Photo")
 
@@ -2124,8 +2122,8 @@ with tabs[-1]:
                             **Panel:** {row.get('Panel', 'N/A')}  
                             **Department:** {row.get('Department', 'N/A')}  
                             **Designation:** {row.get('Designation', 'N/A')}  
-                            **FB ID:** {row.get('Fb id', 'N/A')}  
-                            **LinkedIn ID:** {row.get('linkedIn id', 'N/A')}
+                            **FB ID:** {row.get('fb id', 'N/A')}  
+                            **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
                             """
                         )
 
