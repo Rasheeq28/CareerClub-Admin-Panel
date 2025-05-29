@@ -1751,7 +1751,7 @@ def demote_member(row_id):
         st.error(f"❌ Failed to demote: {e}")
 
 # Add new member
-def add_member(name, panel, department, designation, fb_id, linkedin_id):
+def add_member(name, panel, department, designation, fb_id, linkedin_id, photo_url):
     try:
         new_id = str(uuid.uuid4())
         response = supabase.table(TABLE_NAME).insert({
@@ -1761,7 +1761,8 @@ def add_member(name, panel, department, designation, fb_id, linkedin_id):
             "Department": department,
             "Designation": designation,
             "fb id": fb_id,
-            "linkedin id": linkedin_id
+            "linkedin id": linkedin_id,
+            "photo": photo_url  # <-- Include photo
         }).execute()
         if response.data:
             st.success("✅ New member added successfully!")
@@ -1770,7 +1771,8 @@ def add_member(name, panel, department, designation, fb_id, linkedin_id):
     except Exception as e:
         st.error(f"❌ Failed to add member: {e}")
 
-# Delete member by ID
+
+# Delete member by ID + show img + add img
 def delete_member(row_id):
     try:
         response = supabase.table(TABLE_NAME).delete().eq("id", str(row_id)).execute()
@@ -1844,6 +1846,7 @@ for tab, (raw_label, display_label) in zip(tabs[:-2], panel_labels.items()):
                 st.markdown("---")
 
 # Add Member Tab
+# Add Member Tab
 with tabs[-2]:
     st.subheader("➕ Add New Member")
     with st.form("add_member_form"):
@@ -1853,13 +1856,15 @@ with tabs[-2]:
         designation = st.text_input("Designation")
         fb_id = st.text_input("Facebook ID")
         linkedin_id = st.text_input("LinkedIn ID")
+        photo_url = st.text_input("Photo URL (optional)")
 
         submitted = st.form_submit_button("Add Member")
         if submitted:
             if not name:
                 st.warning("⚠️ Name is required.")
             else:
-                add_member(name, panel, department, designation, fb_id, linkedin_id)
+                add_member(name, panel, department, designation, fb_id, linkedin_id, photo_url)
+
 
 # Delete Member Tab
 with tabs[-1]:
