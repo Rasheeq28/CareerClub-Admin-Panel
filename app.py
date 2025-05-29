@@ -1964,31 +1964,6 @@ def delete_member(row_id):
     except Exception as e:
         st.error(f"❌ Failed to delete member: {e}")
 
-# Promote / Demote
-# def promote_member(row_id):
-#     try:
-#         response = supabase.table(TABLE_NAME).update({
-#             "Panel": "executive member"
-#         }).eq("id", str(row_id)).execute()
-#         if response.data:
-#             st.success("🎉 Member promoted to Executive Member!")
-#             time.sleep(1)
-#             st.rerun()
-#     except Exception as e:
-#         st.error(f"❌ Failed to promote: {e}")
-
-# def demote_member(row_id):
-#     try:
-#         response = supabase.table(TABLE_NAME).update({
-#             "Panel": "general member"
-#         }).eq("id", str(row_id)).execute()
-#         if response.data:
-#             st.success("👋 Member demoted to General Member.")
-#             time.sleep(1)
-#             st.rerun()
-#     except Exception as e:
-#         st.error(f"❌ Failed to demote: {e}")
-
 # Update member
 def update_member(row_id, name, panel, department, designation, fb_id, linkedin_id, photo_url):
     try:
@@ -2019,9 +1994,9 @@ df["Panel"] = df["Panel"].astype(str).str.strip()
 panel_labels = {
     "Executive panel": "Executive Panel",
     "Sub-executive panel": "Sub-Executive Panel",
-    "executive member": "Executive Member",
+    "executive member": "Executive",
     "senior executive": "Senior Executive",
-    "general member": "General Member",
+    "general member": "General",
 }
 
 tabs = st.tabs(list(panel_labels.values()) + ["➕ Add Member", "✏️ Update Member", "🗑️ Delete Member"])
@@ -2062,13 +2037,6 @@ for tab, (raw_label, display_label) in zip(tabs[:-3], panel_labels.items()):
                         """
                     )
 
-                # if raw_label == "general member":
-                #     if st.button("🎯 Promote to Executive", key=f"promote_{row['id']}"):
-                #         promote_member(row["id"])
-                # elif raw_label == "executive member":
-                #     if st.button("↩️ Demote to General", key=f"demote_{row['id']}"):
-                #         demote_member(row["id"])
-                # st.markdown("---")
 
 # Add Member
 with tabs[-3]:
