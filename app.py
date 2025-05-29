@@ -1994,9 +1994,9 @@ df["Panel"] = df["Panel"].astype(str).str.strip()
 panel_labels = {
     "Executive panel": "Executive Panel",
     "Sub-executive panel": "Sub-Executive Panel",
-    "executive member": "Executive",
+    "executive member": "Executive Member",
     "senior executive": "Senior Executive",
-    "general member": "General",
+    "general member": "General Member",
 }
 
 tabs = st.tabs(list(panel_labels.values()) + ["➕ Add Member", "✏️ Update Member", "🗑️ Delete Member"])
@@ -2014,7 +2014,7 @@ for tab, (raw_label, display_label) in zip(tabs[:-3], panel_labels.items()):
 
         filtered_df = panel_df.loc[:, ~panel_df.apply(is_all_zero)]
 
-        st.subheader(f"{display_label} Members")
+        st.subheader(f"{display_label}")
         for _, row in filtered_df.iterrows():
             with st.container():
                 cols = st.columns([1, 3])
