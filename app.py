@@ -1815,16 +1815,26 @@ for tab, (raw_label, display_label) in zip(tabs[:-2], panel_labels.items()):
         st.subheader(f"{display_label} Members")
         for _, row in filtered_df.iterrows():
             with st.container():
-                st.markdown(
-                    f"""
-                    **Name:** {row.get('Name', 'N/A')}  
-                    **Panel:** {row.get('Panel', 'N/A')}  
-                    **Department:** {row.get('Department', 'N/A')}  
-                    **Designation:** {row.get('Designation', 'N/A')}  
-                    **FB ID:** {row.get('fb id', 'N/A')}  
-                    **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
-                    """
-                )
+                cols = st.columns([1, 3])
+                with cols[0]:
+                    photo_url = row.get("photo", "")
+                    if photo_url and photo_url.strip().lower() != "n/a":
+                        st.image(photo_url, width=100)
+                    else:
+                        st.markdown("🚫 No Photo")
+
+                with cols[1]:
+                    st.markdown(
+                        f"""
+                        **Name:** {row.get('Name', 'N/A')}  
+                        **Panel:** {row.get('Panel', 'N/A')}  
+                        **Department:** {row.get('Department', 'N/A')}  
+                        **Designation:** {row.get('Designation', 'N/A')}  
+                        **FB ID:** {row.get('fb id', 'N/A')}  
+                        **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
+                        """
+                    )
+
                 if raw_label == "general member":
                     if st.button("🎯 Promote to Executive", key=f"promote_{row['id']}"):
                         promote_member(row["id"])
@@ -1863,13 +1873,25 @@ with tabs[-1]:
         else:
             for _, row in filtered.iterrows():
                 with st.container():
-                    st.markdown(
-                        f"""
-                        **Name:** {row.get('Name', 'N/A')}  
-                        **Panel:** {row.get('Panel', 'N/A')}  
-                        **Department:** {row.get('Department', 'N/A')}  
-                        **Designation:** {row.get('Designation', 'N/A')}
-                        """
-                    )
+                    cols = st.columns([1, 3])
+                    with cols[0]:
+                        photo_url = row.get("photo", "")
+                        if photo_url and photo_url.strip().lower() != "n/a":
+                            st.image(photo_url, width=100)
+                        else:
+                            st.markdown("🚫 No Photo")
+
+                    with cols[1]:
+                        st.markdown(
+                            f"""
+                            **Name:** {row.get('Name', 'N/A')}  
+                            **Panel:** {row.get('Panel', 'N/A')}  
+                            **Department:** {row.get('Department', 'N/A')}  
+                            **Designation:** {row.get('Designation', 'N/A')}  
+                            **FB ID:** {row.get('fb id', 'N/A')}  
+                            **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
+                            """
+                        )
+
                     if st.button("🗑️ Delete", key=f"delete_{row['id']}"):
                         delete_member(row["id"])
