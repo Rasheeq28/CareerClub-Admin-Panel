@@ -1942,8 +1942,8 @@ def add_member(name, panel, department, designation, fb_id, linkedin_id, photo_u
             "Panel": panel,
             "Department": department,
             "Designation": designation,
-            "fb id": fb_id,
-            "linkedin id": linkedin_id,
+            "Fb id": fb_id,
+            "linkedIn id": linkedin_id,
             "photo": photo_url
         }).execute()
         if response.data:
@@ -1972,8 +1972,8 @@ def update_member(row_id, name, panel, department, designation, fb_id, linkedin_
             "Panel": panel,
             "Department": department,
             "Designation": designation,
-            "fb id": fb_id,
-            "linkedin id": linkedin_id,
+            "Fb id": fb_id,
+            "linkedIn id": linkedin_id,
             "photo": photo_url
         }).eq("id", str(row_id)).execute()
         if response.data:
@@ -2032,8 +2032,8 @@ for tab, (raw_label, display_label) in zip(tabs[:-3], panel_labels.items()):
                         **Panel:** {row.get('Panel', 'N/A')}  
                         **Department:** {row.get('Department', 'N/A')}  
                         **Designation:** {row.get('Designation', 'N/A')}  
-                        **FB ID:** {row.get('fb id', 'N/A')}  
-                        **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
+                        **FB ID:** {row.get('Fb id', 'N/A')}  
+                        **LinkedIn ID:** {row.get('LinkedIn id', 'N/A')}
                         """
                     )
 
@@ -2073,8 +2073,8 @@ with tabs[-2]:
                     panel = st.selectbox("Panel", list(panel_labels.keys()), index=list(panel_labels.keys()).index(row["Panel"]))
                     department = st.text_input("Department", value=row.get("Department", ""))
                     designation = st.text_input("Designation", value=row.get("Designation", ""))
-                    fb_id = st.text_input("Facebook ID", value=row.get("fb id", ""))
-                    linkedin_id = st.text_input("LinkedIn ID", value=row.get("linkedin id", ""))
+                    fb_id = st.text_input("Facebook ID", value=row.get("Fb id", ""))
+                    linkedin_id = st.text_input("LinkedIn ID", value=row.get("LinkedIn id", ""))
                     photo_url = st.text_input("Photo URL", value=row.get("photo", ""))
 
                     submitted = st.form_submit_button("Update Member")
@@ -2108,8 +2108,8 @@ with tabs[-1]:
                             **Panel:** {row.get('Panel', 'N/A')}  
                             **Department:** {row.get('Department', 'N/A')}  
                             **Designation:** {row.get('Designation', 'N/A')}  
-                            **FB ID:** {row.get('fb id', 'N/A')}  
-                            **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
+                            **FB ID:** {row.get('Fb id', 'N/A')}  
+                            **LinkedIn ID:** {row.get('LinkedIn id', 'N/A')}
                             """
                         )
 
