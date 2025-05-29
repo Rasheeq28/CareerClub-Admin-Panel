@@ -2062,13 +2062,13 @@ for tab, (raw_label, display_label) in zip(tabs[:-3], panel_labels.items()):
                         """
                     )
 
-                if raw_label == "general member":
-                    if st.button("🎯 Promote to Executive", key=f"promote_{row['id']}"):
-                        promote_member(row["id"])
-                elif raw_label == "executive member":
-                    if st.button("↩️ Demote to General", key=f"demote_{row['id']}"):
-                        demote_member(row["id"])
-                st.markdown("---")
+                # if raw_label == "general member":
+                #     if st.button("🎯 Promote to Executive", key=f"promote_{row['id']}"):
+                #         promote_member(row["id"])
+                # elif raw_label == "executive member":
+                #     if st.button("↩️ Demote to General", key=f"demote_{row['id']}"):
+                #         demote_member(row["id"])
+                # st.markdown("---")
 
 # Add Member
 with tabs[-3]:
