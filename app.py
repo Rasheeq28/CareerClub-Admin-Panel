@@ -1818,6 +1818,7 @@ for tab, (raw_label, display_label) in zip(tabs[:-2], panel_labels.items()):
                 st.markdown(
                     f"""
                     **Name:** {row.get('Name', 'N/A')}  
+                    **Photo:** {row.get('photo', 'N/A')}
                     **Panel:** {row.get('Panel', 'N/A')}  
                     **Department:** {row.get('Department', 'N/A')}  
                     **Designation:** {row.get('Designation', 'N/A')}  
