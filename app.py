@@ -2021,7 +2021,15 @@ for tab, (raw_label, display_label) in zip(tabs[:-3], panel_labels.items()):
                 with cols[0]:
                     photo_url = row.get("photo", "")
                     if photo_url and photo_url.strip().lower() != "n/a":
-                        st.image(photo_url, width=100)
+                        photo_url = row.get("photo", "")
+                        if photo_url and photo_url.strip().lower() != "n/a" and photo_url.startswith("http"):
+                            try:
+                                st.image(photo_url, width=100)
+                            except Exception as e:
+                                st.warning("⚠️ Failed to load image.")
+                        else:
+                            st.markdown("🚫 No Photo")
+
                     else:
                         st.markdown("🚫 No Photo")
 
@@ -2097,7 +2105,15 @@ with tabs[-1]:
                     with cols[0]:
                         photo_url = row.get("photo", "")
                         if photo_url and photo_url.strip().lower() != "n/a":
-                            st.image(photo_url, width=100)
+                            photo_url = row.get("photo", "")
+                            if photo_url and photo_url.strip().lower() != "n/a" and photo_url.startswith("http"):
+                                try:
+                                    st.image(photo_url, width=100)
+                                except Exception as e:
+                                    st.warning("⚠️ Failed to load image.")
+                            else:
+                                st.markdown("🚫 No Photo")
+
                         else:
                             st.markdown("🚫 No Photo")
 
