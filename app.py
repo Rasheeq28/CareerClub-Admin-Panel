@@ -2129,3 +2129,11 @@ with tabs[-1]:
 
                     if st.button("🗑️ Delete", key=f"delete_{row['id']}"):
                         delete_member(row["id"])
+# Safe check before loading image
+if photo_url and isinstance(photo_url, str) and photo_url.startswith("http"):
+    try:
+        st.image(photo_url, width=100)
+    except Exception as e:
+        st.warning(f"Could not load image: {e}")
+else:
+    st.warning("No valid image URL found.")
