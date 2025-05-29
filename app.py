@@ -1796,8 +1796,10 @@ panel_labels = {
     "Executive panel": "Executive Panel",
     "Sub-executive panel": "Sub-Executive Panel",
     "executive member": "Executive Member",
+    "senior executive": "Senior Executive",  # ✅ New entry
     "general member": "General Member",
 }
+
 
 tabs = st.tabs(list(panel_labels.values()) + ["➕ Add Member", "🗑️ Delete Member"])
 
