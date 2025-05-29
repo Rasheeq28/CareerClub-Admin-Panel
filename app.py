@@ -1751,7 +1751,7 @@ def demote_member(row_id):
         st.error(f"❌ Failed to demote: {e}")
 
 # Add new member
-def add_member(name, panel, department, designation, fb_id, linkedin_id):
+def add_member(name, panel, department, designation, fb_id, linkedin_id, photo):
     try:
         new_id = str(uuid.uuid4())
         response = supabase.table(TABLE_NAME).insert({
@@ -1761,7 +1761,8 @@ def add_member(name, panel, department, designation, fb_id, linkedin_id):
             "Department": department,
             "Designation": designation,
             "fb id": fb_id,
-            "linkedin id": linkedin_id
+            "linkedin id": linkedin_id,
+            "photo": photo
         }).execute()
         if response.data:
             st.success("✅ New member added successfully!")
