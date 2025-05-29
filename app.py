@@ -2033,7 +2033,7 @@ for tab, (raw_label, display_label) in zip(tabs[:-3], panel_labels.items()):
                         **Department:** {row.get('Department', 'N/A')}  
                         **Designation:** {row.get('Designation', 'N/A')}  
                         **FB ID:** {row.get('Fb id', 'N/A')}  
-                        **LinkedIn ID:** {row.get('LinkedIn id', 'N/A')}
+                        **LinkedIn ID:** {row.get('linkedIn id', 'N/A')}
                         """
                     )
 
@@ -2047,7 +2047,7 @@ with tabs[-3]:
         department = st.text_input("Department")
         designation = st.text_input("Designation")
         fb_id = st.text_input("Facebook ID")
-        linkedin_id = st.text_input("LinkedIn ID")
+        linkedin_id = st.text_input("linkedIn ID")
         photo_url = st.text_input("Photo URL (optional)")
 
         submitted = st.form_submit_button("Add Member")
@@ -2074,7 +2074,7 @@ with tabs[-2]:
                     department = st.text_input("Department", value=row.get("Department", ""))
                     designation = st.text_input("Designation", value=row.get("Designation", ""))
                     fb_id = st.text_input("Facebook ID", value=row.get("Fb id", ""))
-                    linkedin_id = st.text_input("LinkedIn ID", value=row.get("LinkedIn id", ""))
+                    linkedin_id = st.text_input("LinkedIn ID", value=row.get("linkedIn id", ""))
                     photo_url = st.text_input("Photo URL", value=row.get("photo", ""))
 
                     submitted = st.form_submit_button("Update Member")
@@ -2109,7 +2109,7 @@ with tabs[-1]:
                             **Department:** {row.get('Department', 'N/A')}  
                             **Designation:** {row.get('Designation', 'N/A')}  
                             **FB ID:** {row.get('Fb id', 'N/A')}  
-                            **LinkedIn ID:** {row.get('LinkedIn id', 'N/A')}
+                            **LinkedIn ID:** {row.get('linkedIn id', 'N/A')}
                             """
                         )
 
