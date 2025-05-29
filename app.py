@@ -1703,6 +1703,8 @@ import uuid
 #                 add_member(name, panel, department, designation, fb_id, linkedin_id)
 
 
+
+# senior exec added
 import streamlit as st
 import pandas as pd
 from supabase import create_client, Client
@@ -1801,7 +1803,8 @@ panel_labels = {
 }
 
 
-tabs = st.tabs(list(panel_labels.values()) + ["➕ Add Member", "🗑️ Delete Member"])
+tabs = st.tabs(list(panel_labels.values()) + ["➕ Add Member", "🗑️ Delete Member", "✏️ Update Member"])
+
 
 # View Members Tabs
 for tab, (raw_label, display_label) in zip(tabs[:-2], panel_labels.items()):
@@ -1902,3 +1905,47 @@ with tabs[-1]:
 
                     if st.button("🗑️ Delete", key=f"delete_{row['id']}"):
                         delete_member(row["id"])
+
+# Update Member Tab
+update_tab = st.tabs(["✏️ Update Member"])[0]
+
+with update_tab:
+    st.subheader("✏️ Update Existing Member")
+    search_name_update = st.text_input("Search member to update by name")
+
+    if search_name_update:
+        filtered = df[df["Name"].str.contains(search_name_update, case=False, na=False)]
+
+        if filtered.empty:
+            st.info("No matching members found.")
+        else:
+            for _, row in filtered.iterrows():
+                with st.expander(f"Edit: {row.get('Name')}"):
+                    with st.form(f"update_form_{row['id']}"):
+                        name = st.text_input("Name", row.get("Name", ""))
+                        panel = st.selectbox("Panel", list(panel_labels.keys()), index=list(panel_labels.keys()).index(row.get("Panel", "")))
+                        department = st.text_input("Department", row.get("Department", ""))
+                        designation = st.text_input("Designation", row.get("Designation", ""))
+                        fb_id = st.text_input("Facebook ID", row.get("fb id", ""))
+                        linkedin_id = st.text_input("LinkedIn ID", row.get("linkedin id", ""))
+                        photo_url = st.text_input("Photo URL (optional)", row.get("photo", ""))
+
+                        submitted = st.form_submit_button("💾 Save Changes")
+                        if submitted:
+                            try:
+                                response = supabase.table(TABLE_NAME).update({
+                                    "Name": name,
+                                    "Panel": panel,
+                                    "Department": department,
+                                    "Designation": designation,
+                                    "fb id": fb_id,
+                                    "linkedin id": linkedin_id,
+                                    "photo": photo_url
+                                }).eq("id", row["id"]).execute()
+                                if response.data:
+                                    st.success("✅ Member info updated!")
+                                    time.sleep(1)
+                                    st.rerun()
+                            except Exception as e:
+                                st.error(f"❌ Failed to update member: {e}")
+
