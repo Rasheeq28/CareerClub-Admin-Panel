@@ -1761,8 +1761,7 @@ def add_member(name, panel, department, designation, fb_id, linkedin_id):
             "Department": department,
             "Designation": designation,
             "fb id": fb_id,
-            "linkedin id": linkedin_id,
-
+            "linkedin id": linkedin_id
         }).execute()
         if response.data:
             st.success("✅ New member added successfully!")
@@ -1816,10 +1815,6 @@ for tab, (raw_label, display_label) in zip(tabs[:-2], panel_labels.items()):
         st.subheader(f"{display_label} Members")
         for _, row in filtered_df.iterrows():
             with st.container():
-                photo_url = row.get("photo", "").strip()
-                if photo_url:
-                    st.image(photo_url, width=150, caption=row.get("Name", "Photo"), use_column_width=False)
-
                 st.markdown(
                     f"""
                     **Name:** {row.get('Name', 'N/A')}  
@@ -1868,18 +1863,12 @@ with tabs[-1]:
         else:
             for _, row in filtered.iterrows():
                 with st.container():
-                    photo_url = row.get("photo", "").strip()
-                    if photo_url:
-                        st.image(photo_url, width=150, caption=row.get("Name", "Photo"), use_column_width=False)
-
                     st.markdown(
                         f"""
                         **Name:** {row.get('Name', 'N/A')}  
                         **Panel:** {row.get('Panel', 'N/A')}  
                         **Department:** {row.get('Department', 'N/A')}  
-                        **Designation:** {row.get('Designation', 'N/A')}  
-                        **FB ID:** {row.get('fb id', 'N/A')}  
-                        **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
+                        **Designation:** {row.get('Designation', 'N/A')}
                         """
                     )
                     if st.button("🗑️ Delete", key=f"delete_{row['id']}"):
