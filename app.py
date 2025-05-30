@@ -2152,7 +2152,6 @@ import time
 # Supabase config
 SUPABASE_URL = "https://orjswswziiisbkvwnpye.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yanN3c3d6aWlpc2JrdnducHllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMjczNDQsImV4cCI6MjA2MzkwMzM0NH0.F2Oe53GzprWjiMYGvxMipplMwE2QeuKRRQI3Zsi7RAM"
-  # Replace with your actual key
 TABLE_NAME = "cc"
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
@@ -2162,8 +2161,7 @@ def fetch_data():
     try:
         response = supabase.table(TABLE_NAME).select("*").execute()
         df = pd.DataFrame(response.data)
-        # Normalize columns (optional: you can also just rename the required ones)
-        df.columns = df.columns.str.strip()  # remove whitespace
+        df.columns = df.columns.str.strip()
         df.rename(columns={
             "panel": "Panel",
             "name": "Name",
@@ -2178,7 +2176,6 @@ def fetch_data():
     except Exception as e:
         st.error(f"Error fetching data: {e}")
         return pd.DataFrame()
-
 
 # Add member
 def add_member(name, panel, department, designation, fb_id, linkedin_id, photo_url):
@@ -2202,7 +2199,6 @@ def add_member(name, panel, department, designation, fb_id, linkedin_id, photo_u
         st.error(f"❌ Failed to add member: {e}")
 
 # Delete member
-
 def delete_member(row_id):
     try:
         response = supabase.table(TABLE_NAME).delete().eq("id", str(row_id)).execute()
@@ -2212,40 +2208,6 @@ def delete_member(row_id):
             st.rerun()
     except Exception as e:
         st.error(f"❌ Failed to delete member: {e}")
-        # CSV Input
-        with tabs[-1]:  # CSV Input is now the last tab
-            st.subheader("📄 Upload CSV to Add Members")
-            uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
-
-            if uploaded_file is not None:
-                try:
-                    csv_df = pd.read_csv(uploaded_file)
-                    required_columns = ["Name", "Panel", "Department", "Designation", "fb id", "linkedin id", "photo"]
-
-                    # Normalize column names
-                    csv_df.columns = csv_df.columns.str.strip()
-
-                    # Check for missing required columns
-                    missing = set(required_columns) - set(csv_df.columns)
-                    if missing:
-                        st.error(f"Missing required columns in CSV: {', '.join(missing)}")
-                    else:
-                        # Assign UUIDs
-                        csv_df["id"] = [str(uuid.uuid4()) for _ in range(len(csv_df))]
-
-                        # Upload to Supabase
-                        records = csv_df[required_columns + ["id"]].to_dict(orient="records")
-                        response = supabase.table(TABLE_NAME).insert(records).execute()
-
-                        if response.data:
-                            st.success(f"✅ {len(response.data)} members added successfully!")
-                            time.sleep(1)
-                            st.rerun()
-                        else:
-                            st.error("❌ Upload failed. Please check data and try again.")
-                except Exception as e:
-                    st.error(f"Error reading file: {e}")
-
 
 # Update member
 def update_member(row_id, name, panel, department, designation, fb_id, linkedin_id, photo_url):
@@ -2282,8 +2244,7 @@ panel_labels = {
     "general member": "General Member",
 }
 
-tabs = st.tabs(list(panel_labels.values()) + ["➕ Add Member", "✏️ Update Member", "🗑️ Delete Member", "📄 CSV Input"])
-
+tabs = st.tabs(list(panel_labels.values()) + ["➕ Add Member", "✏️ Update Member", "🗑️ Delete Member"])
 
 # View Members
 for tab, (raw_label, display_label) in zip(tabs[:-3], panel_labels.items()):
@@ -2306,10 +2267,8 @@ for tab, (raw_label, display_label) in zip(tabs[:-3], panel_labels.items()):
                     photo_url = row.get("photo", "")
                     if photo_url and photo_url.strip().lower() != "n/a":
                         st.write("Photo URL:", photo_url)
-
                     else:
                         st.markdown("🚫 No Photo")
-
                 with cols[1]:
                     st.markdown(
                         f"""
@@ -2321,7 +2280,6 @@ for tab, (raw_label, display_label) in zip(tabs[:-3], panel_labels.items()):
                         **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
                         """
                     )
-
 
 # Add Member
 with tabs[-3]:
@@ -2366,13 +2324,33 @@ with tabs[-2]:
                     if submitted:
                         update_member(row["id"], name, panel, department, designation, fb_id, linkedin_id, photo_url)
 
+    st.subheader("📤 CSV Input")
+    csv_file = st.file_uploader("Upload CSV with columns matching Supabase data", type=["csv"])
+    if csv_file:
+        try:
+            csv_df = pd.read_csv(csv_file)
+            required_cols = ["Name", "Panel", "Department", "Designation", "fb id", "linkedin id", "photo"]
+            if not all(col in csv_df.columns for col in required_cols):
+                st.warning("⚠️ CSV must contain the following columns:\n" + ", ".join(required_cols))
+            else:
+                csv_df["id"] = [str(uuid.uuid4()) for _ in range(len(csv_df))]
+                records = csv_df.to_dict(orient="records")
+                response = supabase.table(TABLE_NAME).insert(records).execute()
+                if response.data:
+                    st.success("✅ CSV data uploaded successfully!")
+                    time.sleep(1)
+                    st.rerun()
+                else:
+                    st.error("❌ Failed to upload data.")
+        except Exception as e:
+            st.error(f"❌ Error processing CSV: {e}")
+
 # Delete Member
 with tabs[-1]:
     st.subheader("🗑️ Delete Member")
     search_name = st.text_input("Search by Name")
     if search_name:
         filtered = df[df["Name"].str.contains(search_name, case=False, na=False)]
-
         if filtered.empty:
             st.info("No matching members found.")
         else:
@@ -2383,10 +2361,8 @@ with tabs[-1]:
                         photo_url = row.get("photo", "")
                         if photo_url and photo_url.strip().lower() != "n/a":
                             st.write("Photo URL:", photo_url)
-
                         else:
                             st.markdown("🚫 No Photo")
-
                     with cols[1]:
                         st.markdown(
                             f"""
@@ -2398,14 +2374,12 @@ with tabs[-1]:
                             **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
                             """
                         )
-
                     if st.button("🗑️ Delete", key=f"delete_{row['id']}"):
                         delete_member(row["id"])
-# Safe check before loading image
+
 if photo_url and isinstance(photo_url, str) and photo_url.startswith("http"):
     try:
         st.write("Photo URL:", photo_url)
-
     except Exception as e:
         st.warning(f"Could not load image: {e}")
 else:
