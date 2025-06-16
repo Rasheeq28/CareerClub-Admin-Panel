@@ -2727,9 +2727,9 @@ panel_labels = {
 
 # Sidebar menu
 menu_options = list(panel_labels.values()) + [
-    "Member Functions > ➕ Add Member",
-    "Member Functions > ✏️ Update Member",
-    "Member Functions > 🗑️ Delete Member"
+    "➕ Add Member",
+    "✏️ Update Member",
+    "🗑️ Delete Member"
 ]
 selected_option = st.sidebar.selectbox("Navigation", menu_options)
 
