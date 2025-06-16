@@ -2622,6 +2622,246 @@ import uuid
 #                             )
 #                         if st.button("🗑️ Delete", key=f"delete_{row['id']}"):
 #                             delete_member(row["id"])
+#
+# import streamlit as st
+# import pandas as pd
+# from supabase import create_client, Client
+# import uuid
+# import time
+#
+# # Supabase config
+# SUPABASE_URL = "https://orjswswziiisbkvwnpye.supabase.co"
+# SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yanN3c3d6aWlpc2JrdnducHllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMjczNDQsImV4cCI6MjA2MzkwMzM0NH0.F2Oe53GzprWjiMYGvxMipplMwE2QeuKRRQI3Zsi7RAM"
+# TABLE_NAME = "cc"
+#
+# supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+#
+# # Fetch data
+# def fetch_data():
+#     try:
+#         response = supabase.table(TABLE_NAME).select("*").execute()
+#         df = pd.DataFrame(response.data)
+#         df.columns = df.columns.str.strip()
+#         df.rename(columns={
+#             "panel": "Panel",
+#             "name": "Name",
+#             "department": "Department",
+#             "designation": "Designation",
+#             "fb id": "fb id",
+#             "linkedin id": "linkedin id",
+#             "photo": "photo",
+#             "id": "id"
+#         }, inplace=True)
+#         return df
+#     except Exception as e:
+#         st.error(f"Error fetching data: {e}")
+#         return pd.DataFrame()
+#
+# # Add member
+# def add_member(name, panel, department, designation, fb_id, linkedin_id, photo_url):
+#     try:
+#         new_id = str(uuid.uuid4())
+#         response = supabase.table(TABLE_NAME).insert({
+#             "id": new_id,
+#             "Name": name,
+#             "Panel": panel,
+#             "Department": department,
+#             "Designation": designation,
+#             "fb id": fb_id,
+#             "linkedin id": linkedin_id,
+#             "photo": photo_url
+#         }).execute()
+#         if response.data:
+#             st.success("✅ New member added successfully!")
+#             time.sleep(1)
+#             st.rerun()
+#     except Exception as e:
+#         st.error(f"❌ Failed to add member: {e}")
+#
+# # Delete member
+# def delete_member(row_id):
+#     try:
+#         response = supabase.table(TABLE_NAME).delete().eq("id", str(row_id)).execute()
+#         if response.data:
+#             st.success("🗑️ Member deleted successfully!")
+#             time.sleep(1)
+#             st.rerun()
+#     except Exception as e:
+#         st.error(f"❌ Failed to delete member: {e}")
+#
+# # Update member
+# def update_member(row_id, name, panel, department, designation, fb_id, linkedin_id, photo_url):
+#     try:
+#         response = supabase.table(TABLE_NAME).update({
+#             "Name": name,
+#             "Panel": panel,
+#             "Department": department,
+#             "Designation": designation,
+#             "fb id": fb_id,
+#             "linkedin id": linkedin_id,
+#             "photo": photo_url
+#         }).eq("id", str(row_id)).execute()
+#         if response.data:
+#             st.success("✅ Member updated successfully!")
+#             time.sleep(1)
+#             st.rerun()
+#     except Exception as e:
+#         st.error(f"❌ Failed to update member: {e}")
+#
+# # Load data
+# df = fetch_data()
+# if "Panel" not in df.columns:
+#     st.error("Missing 'Panel' column.")
+#     st.stop()
+#
+# df["Panel"] = df["Panel"].astype(str).str.strip()
+#
+# # Define panel labels
+# panel_labels = {
+#     "Executive panel": "Executive Panel",
+#     "Sub-executive panel": "Sub-Executive Panel",
+#     "executive member": "Executive Member",
+#     "senior executive": "Senior Executive",
+#     "general member": "General Member",
+# }
+#
+# # Sidebar menu
+# menu_options = list(panel_labels.values()) + [
+#     "➕ Add Member",
+#     "✏️ Update Member",
+#     "🗑️ Delete Member"
+# ]
+# selected_option = st.sidebar.selectbox("Navigation", menu_options)
+#
+# # View members
+# if selected_option in panel_labels.values():
+#     raw_label = [k for k, v in panel_labels.items() if v == selected_option][0]
+#     panel_df = df[df["Panel"] == raw_label]
+#     if panel_df.empty:
+#         st.info(f"No members in {selected_option}.")
+#     else:
+#         def is_all_zero(series):
+#             return ((series.astype(str).str.strip() == "0") | (series == 0)).all()
+#
+#         filtered_df = panel_df.loc[:, ~panel_df.apply(is_all_zero)]
+#
+#         st.subheader(f"{selected_option}")
+#         for _, row in filtered_df.iterrows():
+#             with st.container():
+#                 cols = st.columns([1, 3])
+#                 with cols[0]:
+#                     photo_url = row.get("photo", "")
+#                     if photo_url and photo_url.strip().lower() != "n/a":
+#                         st.write("Photo URL:", photo_url)
+#                     else:
+#                         st.markdown("🚫 No Photo")
+#                 with cols[1]:
+#                     st.markdown(
+#                         f"""
+#                         **Name:** {row.get('Name', 'N/A')}
+#                         **Panel:** {row.get('Panel', 'N/A')}
+#                         **Department:** {row.get('Department', 'N/A')}
+#                         **Designation:** {row.get('Designation', 'N/A')}
+#                         **FB ID:** {row.get('fb id', 'N/A')}
+#                         **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
+#                         """
+#                     )
+#
+# # Add Member
+# elif selected_option == "Member Functions > ➕ Add Member":
+#     st.subheader("➕ Add New Member")
+#     with st.form("add_member_form"):
+#         name = st.text_input("Name")
+#         panel = st.selectbox("Panel", list(panel_labels.keys()))
+#         department = st.text_input("Department")
+#         designation = st.text_input("Designation")
+#         fb_id = st.text_input("Facebook ID")
+#         linkedin_id = st.text_input("LinkedIn ID")
+#         photo_url = st.text_input("Photo URL (optional)")
+#
+#         submitted = st.form_submit_button("Add Member")
+#         if submitted:
+#             if not name:
+#                 st.warning("⚠️ Name is required.")
+#             else:
+#                 add_member(name, panel, department, designation, fb_id, linkedin_id, photo_url)
+#
+# # Update Member
+# elif selected_option == "Member Functions > ✏️ Update Member":
+#     st.subheader("✏️ Update Member")
+#     search_name = st.text_input("Search member to update by name")
+#     if search_name:
+#         filtered = df[df["Name"].str.contains(search_name, case=False, na=False)]
+#         if filtered.empty:
+#             st.info("No matching members found.")
+#         else:
+#             for _, row in filtered.iterrows():
+#                 with st.form(f"update_form_{row['id']}"):
+#                     st.markdown(f"#### Updating: **{row['Name']}**")
+#                     name = st.text_input("Name", value=row["Name"])
+#                     panel = st.selectbox("Panel", list(panel_labels.keys()), index=list(panel_labels.keys()).index(row["Panel"]))
+#                     department = st.text_input("Department", value=row.get("Department", ""))
+#                     designation = st.text_input("Designation", value=row.get("Designation", ""))
+#                     fb_id = st.text_input("Facebook ID", value=row.get("fb id", ""))
+#                     linkedin_id = st.text_input("LinkedIn ID", value=row.get("linkedin id", ""))
+#                     photo_url = st.text_input("Photo URL", value=row.get("photo", ""))
+#
+#                     submitted = st.form_submit_button("Update Member")
+#                     if submitted:
+#                         update_member(row["id"], name, panel, department, designation, fb_id, linkedin_id, photo_url)
+#
+#     st.subheader("📤 CSV Input")
+#     csv_file = st.file_uploader("Upload CSV with columns matching Supabase data", type=["csv"])
+#     if csv_file:
+#         try:
+#             csv_df = pd.read_csv(csv_file)
+#             required_cols = ["Name", "Panel", "Department", "Designation", "fb id", "linkedin id", "photo"]
+#             if not all(col in csv_df.columns for col in required_cols):
+#                 st.warning("⚠️ CSV must contain the following columns:\n" + ", ".join(required_cols))
+#             else:
+#                 csv_df["id"] = [str(uuid.uuid4()) for _ in range(len(csv_df))]
+#                 records = csv_df.to_dict(orient="records")
+#                 response = supabase.table(TABLE_NAME).insert(records).execute()
+#                 if response.data:
+#                     st.success("✅ CSV data uploaded successfully!")
+#                     time.sleep(1)
+#                     st.rerun()
+#                 else:
+#                     st.error("❌ Failed to upload data.")
+#         except Exception as e:
+#             st.error(f"❌ Error processing CSV: {e}")
+#
+# # Delete Member
+# elif selected_option == "Member Functions > 🗑️ Delete Member":
+#     st.subheader("🗑️ Delete Member")
+#     search_name = st.text_input("Search by Name")
+#     if search_name:
+#         filtered = df[df["Name"].str.contains(search_name, case=False, na=False)]
+#         if filtered.empty:
+#             st.info("No matching members found.")
+#         else:
+#             for _, row in filtered.iterrows():
+#                 with st.container():
+#                     cols = st.columns([1, 3])
+#                     with cols[0]:
+#                         photo_url = row.get("photo", "")
+#                         if photo_url and photo_url.strip().lower() != "n/a":
+#                             st.write("Photo URL:", photo_url)
+#                         else:
+#                             st.markdown("🚫 No Photo")
+#                     with cols[1]:
+#                         st.markdown(
+#                             f"""
+#                             **Name:** {row.get('Name', 'N/A')}
+#                             **Panel:** {row.get('Panel', 'N/A')}
+#                             **Department:** {row.get('Department', 'N/A')}
+#                             **Designation:** {row.get('Designation', 'N/A')}
+#                             **FB ID:** {row.get('fb id', 'N/A')}
+#                             **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
+#                             """
+#                         )
+#                     if st.button("🗑️ Delete", key=f"delete_{row['id']}"):
+#                         delete_member(row["id"])
 
 import streamlit as st
 import pandas as pd
@@ -2725,13 +2965,30 @@ panel_labels = {
     "general member": "General Member",
 }
 
-# Sidebar menu
-menu_options = list(panel_labels.values()) + [
-    "➕ Add Member",
-    "✏️ Update Member",
-    "🗑️ Delete Member"
-]
-selected_option = st.sidebar.selectbox("Navigation", menu_options)
+# Sidebar: Grouped Navigation
+st.sidebar.title("📋 Navigation")
+
+# Member list section
+with st.sidebar.expander("👥 Member List", expanded=True):
+    selected_member_panel = st.radio(
+        "View by Panel",
+        list(panel_labels.values()),
+        label_visibility="collapsed"
+    )
+
+# Member functions section
+with st.sidebar.expander("⚙️ Member Functions", expanded=True):
+    selected_function = st.radio(
+        "Actions",
+        ["➕ Add Member", "✏️ Update Member", "🗑️ Delete Member"],
+        label_visibility="collapsed"
+    )
+
+# Determine selected option
+if selected_function:
+    selected_option = f"Member Functions > {selected_function}"
+else:
+    selected_option = selected_member_panel
 
 # View members
 if selected_option in panel_labels.values():
@@ -2862,7 +3119,6 @@ elif selected_option == "Member Functions > 🗑️ Delete Member":
                         )
                     if st.button("🗑️ Delete", key=f"delete_{row['id']}"):
                         delete_member(row["id"])
-
 
 
 
