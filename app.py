@@ -2968,6 +2968,26 @@ panel_labels = {
 # Sidebar: Grouped Navigation
 st.sidebar.title("📋 Navigation")
 
+# Top-level toggle
+mode = st.sidebar.radio("Select Mode", ["👥 View Members", "⚙️ Manage Members"])
+
+if mode == "👥 View Members":
+    selected_member_panel = st.sidebar.radio(
+        "Choose Panel to View",
+        list(panel_labels.values()),
+        key="view_radio"
+    )
+    selected_option = selected_member_panel
+
+elif mode == "⚙️ Manage Members":
+    selected_function = st.sidebar.radio(
+        "Choose Function",
+        ["➕ Add Member", "✏️ Update Member", "🗑️ Delete Member"],
+        key="function_radio"
+    )
+    selected_option = f"Member Functions > {selected_function}"
+
+
 # Member list section
 with st.sidebar.expander("👥 Member List", expanded=True):
     selected_member_panel = st.radio(
