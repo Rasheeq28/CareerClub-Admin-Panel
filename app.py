@@ -2758,11 +2758,11 @@ if selected_option in panel_labels.values():
                 with cols[1]:
                     st.markdown(
                         f"""
-                        **Name:** {row.get('Name', 'N/A')}  
-                        **Panel:** {row.get('Panel', 'N/A')}  
-                        **Department:** {row.get('Department', 'N/A')}  
-                        **Designation:** {row.get('Designation', 'N/A')}  
-                        **FB ID:** {row.get('fb id', 'N/A')}  
+                        **Name:** {row.get('Name', 'N/A')}
+                        **Panel:** {row.get('Panel', 'N/A')}
+                        **Department:** {row.get('Department', 'N/A')}
+                        **Designation:** {row.get('Designation', 'N/A')}
+                        **FB ID:** {row.get('fb id', 'N/A')}
                         **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
                         """
                     )
@@ -2852,17 +2852,153 @@ elif selected_option == "Member Functions > 🗑️ Delete Member":
                     with cols[1]:
                         st.markdown(
                             f"""
-                            **Name:** {row.get('Name', 'N/A')}  
-                            **Panel:** {row.get('Panel', 'N/A')}  
-                            **Department:** {row.get('Department', 'N/A')}  
-                            **Designation:** {row.get('Designation', 'N/A')}  
-                            **FB ID:** {row.get('fb id', 'N/A')}  
+                            **Name:** {row.get('Name', 'N/A')}
+                            **Panel:** {row.get('Panel', 'N/A')}
+                            **Department:** {row.get('Department', 'N/A')}
+                            **Designation:** {row.get('Designation', 'N/A')}
+                            **FB ID:** {row.get('fb id', 'N/A')}
                             **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
                             """
                         )
                     if st.button("🗑️ Delete", key=f"delete_{row['id']}"):
                         delete_member(row["id"])
 
+# Sidebar structure
+st.sidebar.title("Members")
+
+section = st.sidebar.radio("Choose Section", ["Member list", "Member functions"])
+
+if section == "Member list":
+    selected_panel = st.sidebar.radio("Choose Panel", list(panel_labels.values()))
+
+    raw_label = [k for k, v in panel_labels.items() if v == selected_panel][0]
+    panel_df = df[df["Panel"] == raw_label]
+
+    st.header(f"{selected_panel}")
+    if panel_df.empty:
+        st.info(f"No members in {selected_panel}.")
+    else:
+        def is_all_zero(series):
+            return ((series.astype(str).str.strip() == "0") | (series == 0)).all()
+
+        filtered_df = panel_df.loc[:, ~panel_df.apply(is_all_zero)]
+
+        for _, row in filtered_df.iterrows():
+            with st.container():
+                cols = st.columns([1, 3])
+                with cols[0]:
+                    photo_url = row.get("photo", "")
+                    if photo_url and photo_url.strip().lower() != "n/a":
+                        st.image(photo_url, width=100)
+                    else:
+                        st.markdown("🚫 No Photo")
+                with cols[1]:
+                    st.markdown(
+                        f"""
+                        **Name:** {row.get('Name', 'N/A')}  
+                        **Panel:** {row.get('Panel', 'N/A')}  
+                        **Department:** {row.get('Department', 'N/A')}  
+                        **Designation:** {row.get('Designation', 'N/A')}  
+                        **FB ID:** {row.get('fb id', 'N/A')}  
+                        **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
+                        """
+                    )
+
+elif section == "Member functions":
+    function_tab = st.sidebar.radio("Choose Function", ["➕ Add Member", "✏️ Update Member", "🗑️ Delete Member"])
+
+    if function_tab == "➕ Add Member":
+        st.subheader("➕ Add New Member")
+        with st.form("add_member_form"):
+            name = st.text_input("Name")
+            panel = st.selectbox("Panel", list(panel_labels.keys()))
+            department = st.text_input("Department")
+            designation = st.text_input("Designation")
+            fb_id = st.text_input("Facebook ID")
+            linkedin_id = st.text_input("LinkedIn ID")
+            photo_url = st.text_input("Photo URL (optional)")
+
+            submitted = st.form_submit_button("Add Member")
+            if submitted:
+                if not name:
+                    st.warning("⚠️ Name is required.")
+                else:
+                    add_member(name, panel, department, designation, fb_id, linkedin_id, photo_url)
+
+    elif function_tab == "✏️ Update Member":
+        st.subheader("✏️ Update Member")
+        search_name = st.text_input("Search member to update by name")
+        if search_name:
+            filtered = df[df["Name"].str.contains(search_name, case=False, na=False)]
+            if filtered.empty:
+                st.info("No matching members found.")
+            else:
+                for _, row in filtered.iterrows():
+                    with st.form(f"update_form_{row['id']}"):
+                        st.markdown(f"#### Updating: **{row['Name']}**")
+                        name = st.text_input("Name", value=row["Name"])
+                        panel = st.selectbox("Panel", list(panel_labels.keys()), index=list(panel_labels.keys()).index(row["Panel"]))
+                        department = st.text_input("Department", value=row.get("Department", ""))
+                        designation = st.text_input("Designation", value=row.get("Designation", ""))
+                        fb_id = st.text_input("Facebook ID", value=row.get("fb id", ""))
+                        linkedin_id = st.text_input("LinkedIn ID", value=row.get("linkedin id", ""))
+                        photo_url = st.text_input("Photo URL", value=row.get("photo", ""))
+
+                        submitted = st.form_submit_button("Update Member")
+                        if submitted:
+                            update_member(row["id"], name, panel, department, designation, fb_id, linkedin_id, photo_url)
+
+        st.subheader("📤 CSV Input")
+        csv_file = st.file_uploader("Upload CSV with columns matching Supabase data", type=["csv"])
+        if csv_file:
+            try:
+                csv_df = pd.read_csv(csv_file)
+                required_cols = ["Name", "Panel", "Department", "Designation", "fb id", "linkedin id", "photo"]
+                if not all(col in csv_df.columns for col in required_cols):
+                    st.warning("⚠️ CSV must contain the following columns:\n" + ", ".join(required_cols))
+                else:
+                    csv_df["id"] = [str(uuid.uuid4()) for _ in range(len(csv_df))]
+                    records = csv_df.to_dict(orient="records")
+                    response = supabase.table(TABLE_NAME).insert(records).execute()
+                    if response.data:
+                        st.success("✅ CSV data uploaded successfully!")
+                        time.sleep(1)
+                        st.rerun()
+                    else:
+                        st.error("❌ Failed to upload data.")
+            except Exception as e:
+                st.error(f"❌ Error processing CSV: {e}")
+
+    elif function_tab == "🗑️ Delete Member":
+        st.subheader("🗑️ Delete Member")
+        search_name = st.text_input("Search by Name")
+        if search_name:
+            filtered = df[df["Name"].str.contains(search_name, case=False, na=False)]
+            if filtered.empty:
+                st.info("No matching members found.")
+            else:
+                for _, row in filtered.iterrows():
+                    with st.container():
+                        cols = st.columns([1, 3])
+                        with cols[0]:
+                            photo_url = row.get("photo", "")
+                            if photo_url and photo_url.strip().lower() != "n/a":
+                                st.image(photo_url, width=100)
+                            else:
+                                st.markdown("🚫 No Photo")
+                        with cols[1]:
+                            st.markdown(
+                                f"""
+                                **Name:** {row.get('Name', 'N/A')}  
+                                **Panel:** {row.get('Panel', 'N/A')}  
+                                **Department:** {row.get('Department', 'N/A')}  
+                                **Designation:** {row.get('Designation', 'N/A')}  
+                                **FB ID:** {row.get('fb id', 'N/A')}  
+                                **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
+                                """
+                            )
+                        if st.button("🗑️ Delete", key=f"delete_{row['id']}"):
+                            delete_member(row["id"])
 
 
 
