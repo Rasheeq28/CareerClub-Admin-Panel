@@ -3661,8 +3661,13 @@ elif mode == "💼 Manage Jobs":
         st.subheader("➕ Add Job Listing")
         with st.form("add_job_form"):
             company_logo = st.text_input("Company Logo URL")
-            job_modality = st.text_input("Job Modality")
-            job_timing = st.text_input("Job Timing")
+
+            # Dropdown for Job Modality
+            job_modality = st.selectbox("Job Modality", ["On-Site", "Remote", "Hybrid"])
+
+            # Dropdown for Job Timing
+            job_timing = st.selectbox("Job Timing", ["Full-time", "Part time", "Contractual"])
+
             company_name = st.text_input("Company Name")
             position = st.text_input("Position/Role")
             skills = st.text_area("Skills (comma-separated)")
