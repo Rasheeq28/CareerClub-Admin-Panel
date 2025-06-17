@@ -4177,7 +4177,7 @@ def update_member(row_id, name, panel, department, designation, fb_id, linkedin_
 # --- JOB FUNCTIONS ---
 
 def add_job(company_logo, job_modality, job_timing, company_name, position, skills,
-            company_google_forms, company_email, company_website_url, location, deadline, job_info):
+            job_info, deadline, location, website, email, forms_link):
     new_id = str(uuid.uuid4())
     response = supabase.table(JOBS_TABLE).insert({
         "id": new_id,
@@ -4187,12 +4187,12 @@ def add_job(company_logo, job_modality, job_timing, company_name, position, skil
         "company name": company_name,
         "position/role": position,
         "skills": skills,
-        "company google forms": company_google_forms,
-        "company email": company_email,
-        "company website url": company_website_url,
-        "location": location,
+        "job info": job_info,
         "deadline": deadline,
-        "job info": job_info
+        "location": location,
+        "company website url": website,
+        "company email": email,
+        "company google forms": forms_link
     }).execute()
     if response.data:
         st.success("✅ Job added successfully!")
@@ -4379,18 +4379,22 @@ elif mode == "💼 Manage Jobs":
             position = st.text_input("Position/Role")
             skills = st.text_area("Skills (comma-separated)")
 
-            # New Fields
-            company_google_forms = st.text_input("Google Forms Link")
-            company_email = st.text_input("Company Email")
-            company_website_url = st.text_input("Company Website URL")
-            location = st.text_input("Location")
-            deadline = st.date_input("Deadline")
-            job_info = st.text_area("Job Info")
+            # ✅ Newly added fields
+            job_info = st.text_area("Job Info / Description")
+            deadline = st.date_input("Application Deadline")
+            location = st.text_input("Job Location")
+            website = st.text_input("Company Website URL")
+            email = st.text_input("Company Email")
+            forms_link = st.text_input("Application Form (Google Forms)")
 
             submit = st.form_submit_button("Add Job")
             if submit:
-                add_job(company_logo, job_modality, job_timing, company_name, position, skills,
-                        company_google_forms, company_email, company_website_url, location, str(deadline), job_info)
+                add_job(
+                    company_logo, job_modality, job_timing,
+                    company_name, position, skills,
+                    job_info, str(deadline), location,
+                    website, email, forms_link
+                )
 
 
 
