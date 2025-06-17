@@ -3479,18 +3479,18 @@ def update_member(row_id, name, panel, department, designation, fb_id, linkedin_
 def add_job(company_logo, job_modality, job_timing, company_name, position, skills):
     new_id = str(uuid.uuid4())
     response = supabase.table(JOBS_TABLE).insert({
-        "id": new_id,
-        "company_logo": company_logo,
-        "job_modality": job_modality,
-        "job_timing": job_timing,
-        "company_name": company_name,
-        "position": position,
+        "company logo": company_logo,
+        "job modality": job_modality,
+        "job timing": job_timing,
+        "company name": company_name,
+        "position/role": position,
         "skills": skills
     }).execute()
     if response.data:
         st.success("✅ Job added successfully!")
         time.sleep(1)
         st.success("Operation successful! Please refresh the page.")
+
 
 
 
