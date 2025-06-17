@@ -3436,7 +3436,8 @@ def add_member(name, panel, department, designation, fb_id, linkedin_id, photo_u
         if response.data:
             st.success("✅ New member added successfully!")
             time.sleep(1)
-            st.experimental_rerun()
+            st.success("Operation successful! Please refresh the page.")
+
     except Exception as e:
         st.error(f"❌ Failed to add member: {e}")
 
@@ -3447,7 +3448,8 @@ def delete_member(row_id):
         if response.data:
             st.success("🗑️ Member deleted successfully!")
             time.sleep(1)
-            st.experimental_rerun()
+            st.success("Operation successful! Please refresh the page.")
+
     except Exception as e:
         st.error(f"❌ Failed to delete member: {e}")
 
@@ -3466,7 +3468,8 @@ def update_member(row_id, name, panel, department, designation, fb_id, linkedin_
         if response.data:
             st.success("✅ Member updated successfully!")
             time.sleep(1)
-            st.experimental_rerun()
+            st.success("Operation successful! Please refresh the page.")
+
     except Exception as e:
         st.error(f"❌ Failed to update member: {e}")
 
@@ -3487,7 +3490,8 @@ def add_job(company_logo, job_modality, job_timing, company_name, position, skil
     if response.data:
         st.success("✅ Job added successfully!")
         time.sleep(1)
-        st.experimental_rerun()
+        st.success("Operation successful! Please refresh the page.")
+
 
 
 def delete_job(job_id):
@@ -3495,7 +3499,8 @@ def delete_job(job_id):
     if response.data:
         st.success("🗑️ Job deleted successfully!")
         time.sleep(1)
-        st.experimental_rerun()
+        st.success("Operation successful! Please refresh the page.")
+
 
 
 def update_job(job_id, company_logo, job_modality, job_timing, company_name, position, skills):
@@ -3510,7 +3515,8 @@ def update_job(job_id, company_logo, job_modality, job_timing, company_name, pos
     if response.data:
         st.success("✅ Job updated successfully!")
         time.sleep(1)
-        st.experimental_rerun()
+        st.success("Operation successful! Please refresh the page.")
+
 
 
 def fetch_jobs():
@@ -3610,7 +3616,8 @@ if mode == "👥 Manage Members":
                     if response.data:
                         st.success("✅ CSV data uploaded successfully!")
                         time.sleep(1)
-                        st.experimental_rerun()
+                        st.success("Operation successful! Please refresh the page.")
+
                     else:
                         st.error("❌ Failed to upload data.")
             except Exception as e:
