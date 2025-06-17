@@ -3505,11 +3505,11 @@ def delete_job(job_id):
 
 def update_job(job_id, company_logo, job_modality, job_timing, company_name, position, skills):
     response = supabase.table(JOBS_TABLE).update({
-        "company_logo": company_logo,
-        "job_modality": job_modality,
-        "job_timing": job_timing,
-        "company_name": company_name,
-        "position": position,
+        "company logo": company_logo,
+        "job modality": job_modality,
+        "job timing": job_timing,
+        "company name": company_name,
+        "position/role": position,
         "skills": skills
     }).eq("id", str(job_id)).execute()
     if response.data:
@@ -3522,7 +3522,6 @@ def update_job(job_id, company_logo, job_modality, job_timing, company_name, pos
 def fetch_jobs():
     response = supabase.table(JOBS_TABLE).select("*").execute()
     return pd.DataFrame(response.data)
-
 
 # --- PANEL LABELS ---
 
