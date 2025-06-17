@@ -4200,7 +4200,6 @@ def add_job(company_logo, job_modality, job_timing, company_name, position, skil
         st.success("Operation successful! Please refresh the page.")
 
 
-
 def delete_job(job_id):
     response = supabase.table(JOBS_TABLE).delete().eq("id", str(job_id)).execute()
     if response.data:
@@ -4209,21 +4208,14 @@ def delete_job(job_id):
         st.success("Operation successful! Please refresh the page.")
 
 
-def update_job(job_id, company_logo, job_modality, job_timing, company_name, position, skills,
-               company_google_forms, company_email, company_website_url, location, deadline, job_info):
+def update_job(job_id, company_logo, job_modality, job_timing, company_name, position, skills):
     response = supabase.table(JOBS_TABLE).update({
         "company logo": company_logo,
         "job modality": job_modality,
         "job timing": job_timing,
         "company name": company_name,
         "position/role": position,
-        "skills": skills,
-        "company google forms": company_google_forms,
-        "company email": company_email,
-        "company website url": company_website_url,
-        "location": location,
-        "deadline": deadline,
-        "job info": job_info
+        "skills": skills
     }).eq("id", str(job_id)).execute()
     if response.data:
         st.success("✅ Job updated successfully!")
@@ -4234,6 +4226,7 @@ def update_job(job_id, company_logo, job_modality, job_timing, company_name, pos
 def fetch_jobs():
     response = supabase.table(JOBS_TABLE).select("*").execute()
     return pd.DataFrame(response.data)
+
 
 
 # --- PANEL LABELS ---
@@ -4378,78 +4371,54 @@ elif mode == "💼 Manage Jobs":
             company_name = st.text_input("Company Name")
             position = st.text_input("Position/Role")
             skills = st.text_area("Skills (comma-separated)")
-
-            # ✅ Newly added fields
             job_info = st.text_area("Job Info / Description")
             deadline = st.date_input("Application Deadline")
             location = st.text_input("Job Location")
             website = st.text_input("Company Website URL")
             email = st.text_input("Company Email")
             forms_link = st.text_input("Application Form (Google Forms)")
-
             submit = st.form_submit_button("Add Job")
             if submit:
-                add_job(
-                    company_logo, job_modality, job_timing,
-                    company_name, position, skills,
-                    job_info, str(deadline), location,
-                    website, email, forms_link
-                )
-
-
+                add_job(company_logo, job_modality, job_timing, company_name, position, skills,
+                        job_info, str(deadline), location, website, email, forms_link)
 
     elif job_action == "✏️ Update Job":
-
         st.subheader("✏️ Update Job Listing")
-
         jobs_df = fetch_jobs()
-
         if jobs_df.empty:
-
             st.info("No jobs found.")
-
         else:
-
             for _, row in jobs_df.iterrows():
-
                 with st.form(f"update_form_{row['id']}"):
-
                     st.markdown(f"**Editing Job at {row['company name']} - {row['position/role']}**")
-
                     company_logo = st.text_input("Company Logo", row.get("company logo", ""))
-
                     job_modality = st.text_input("Job Modality", row.get("job modality", ""))
-
                     job_timing = st.text_input("Job Timing", row.get("job timing", ""))
-
                     company_name = st.text_input("Company Name", row.get("company name", ""))
-
                     position = st.text_input("Position/Role", row.get("position/role", ""))
-
                     skills = st.text_area("Skills", row.get("skills", ""))
-
-                    # New Fields
-
-                    company_google_forms = st.text_input("Google Forms Link", row.get("company google forms", ""))
-
-                    company_email = st.text_input("Company Email", row.get("company email", ""))
-
-                    company_website_url = st.text_input("Company Website URL", row.get("company website url", ""))
-
-                    location = st.text_input("Location", row.get("location", ""))
-
-                    deadline = st.text_input("Deadline", row.get("deadline", ""))
-
                     job_info = st.text_area("Job Info", row.get("job info", ""))
-
-                    submit = st.form_submit_button("Update Job")
-
-                    if submit:
-                        update_job(row["id"], company_logo, job_modality, job_timing, company_name, position, skills,
-
-                                   company_google_forms, company_email, company_website_url, location, deadline,
-                                   job_info)
-
+                    deadline = st.text_input("Deadline", row.get("deadline", ""))
+                    location = st.text_input("Location", row.get("location", ""))
+                    website = st.text_input("Company Website", row.get("company website url", ""))
+                    email = st.text_input("Company Email", row.get("company email", ""))
+                    forms_link = st.text_input("Google Form", row.get("company google forms", ""))
+                    if st.form_submit_button("Update Job"):
+                        supabase.table(JOBS_TABLE).update({
+                            "company logo": company_logo,
+                            "job modality": job_modality,
+                            "job timing": job_timing,
+                            "company name": company_name,
+                            "position/role": position,
+                            "skills": skills,
+                            "job info": job_info,
+                            "deadline": deadline,
+                            "location": location,
+                            "company website url": website,
+                            "company email": email,
+                            "company google forms": forms_link
+                        }).eq("id", str(row["id"])).execute()
+                        st.success("✅ Job updated successfully!")
 
     elif job_action == "🗑️ Delete Job":
         st.subheader("🗑️ Delete Job Listing")
@@ -4473,18 +4442,29 @@ elif mode == "📄 View Jobs":
             with st.container():
                 st.markdown(f"""
                     **🏢 Company:** {row['company name']}
+
                     **💼 Position:** {row['position/role']}
+
                     **🕒 Timing:** {row['job timing']}
+
                     **📍 Modality:** {row['job modality']}
-                    **📧 Email:** {row.get('company email', 'N/A')}
-                    **🌐 Website:** {row.get('company website url', 'N/A')}
+
                     **📍 Location:** {row.get('location', 'N/A')}
-                    **📅 Deadline:** {row.get('deadline', 'N/A')}
+
                     **🧠 Skills:** {row['skills']}
-                    **📄 More Info:** {row.get('job info', 'N/A')}
-                    **📋 Apply:** [Google Form]({row.get('company google forms', '#')})
+
+                    **📝 Info:** {row.get('job info', 'N/A')}
+
+                    **📅 Deadline:** {row.get('deadline', 'N/A')}
+
+                    **🌐 Website:** {row.get('company website url', 'N/A')}
+
+                    **📧 Email:** {row.get('company email', 'N/A')}
+
+                    **📋 Form:** {row.get('company google forms', 'N/A')}
                 """)
                 if row['company logo']:
                     st.image(row['company logo'], width=100)
                 st.markdown("---")
+
 
