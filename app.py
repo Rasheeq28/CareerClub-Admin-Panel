@@ -3380,6 +3380,356 @@ import uuid
 #
 
 #job functionalities
+# import streamlit as st
+# import pandas as pd
+# from supabase import create_client, Client
+# import uuid
+# import time
+#
+# # Supabase config
+# SUPABASE_URL = "https://orjswswziiisbkvwnpye.supabase.co"
+# SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yanN3c3d6aWlpc2JrdnducHllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMjczNDQsImV4cCI6MjA2MzkwMzM0NH0.F2Oe53GzprWjiMYGvxMipplMwE2QeuKRRQI3Zsi7RAM"
+# TABLE_NAME = "cc"
+# JOBS_TABLE = "job_cards"
+#
+# supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+#
+#
+# # --- MEMBER FUNCTIONS ---
+#
+# def fetch_data():
+#     try:
+#         response = supabase.table(TABLE_NAME).select("*").execute()
+#         df = pd.DataFrame(response.data)
+#         if df.empty:
+#             return df
+#         df.columns = df.columns.str.strip()
+#         df.rename(columns={
+#             "panel": "Panel",
+#             "name": "Name",
+#             "department": "Department",
+#             "designation": "Designation",
+#             "fb id": "fb id",
+#             "linkedin id": "linkedin id",
+#             "photo": "photo",
+#             "id": "id"
+#         }, inplace=True)
+#         return df
+#     except Exception as e:
+#         st.error(f"Error fetching data: {e}")
+#         return pd.DataFrame()
+#
+#
+# def add_member(name, panel, department, designation, fb_id, linkedin_id, photo_url):
+#     try:
+#         new_id = str(uuid.uuid4())
+#         response = supabase.table(TABLE_NAME).insert({
+#             "id": new_id,
+#             "Name": name,
+#             "Panel": panel,
+#             "Department": department,
+#             "Designation": designation,
+#             "fb id": fb_id,
+#             "linkedin id": linkedin_id,
+#             "photo": photo_url
+#         }).execute()
+#         if response.data:
+#             st.success("✅ New member added successfully!")
+#             time.sleep(1)
+#             st.success("Operation successful! Please refresh the page.")
+#
+#     except Exception as e:
+#         st.error(f"❌ Failed to add member: {e}")
+#
+#
+# def delete_member(row_id):
+#     try:
+#         response = supabase.table(TABLE_NAME).delete().eq("id", str(row_id)).execute()
+#         if response.data:
+#             st.success("🗑️ Member deleted successfully!")
+#             time.sleep(1)
+#             st.success("Operation successful! Please refresh the page.")
+#
+#     except Exception as e:
+#         st.error(f"❌ Failed to delete member: {e}")
+#
+#
+# def update_member(row_id, name, panel, department, designation, fb_id, linkedin_id, photo_url):
+#     try:
+#         response = supabase.table(TABLE_NAME).update({
+#             "Name": name,
+#             "Panel": panel,
+#             "Department": department,
+#             "Designation": designation,
+#             "fb id": fb_id,
+#             "linkedin id": linkedin_id,
+#             "photo": photo_url
+#         }).eq("id", str(row_id)).execute()
+#         if response.data:
+#             st.success("✅ Member updated successfully!")
+#             time.sleep(1)
+#             st.success("Operation successful! Please refresh the page.")
+#
+#     except Exception as e:
+#         st.error(f"❌ Failed to update member: {e}")
+#
+#
+# # --- JOB FUNCTIONS ---
+#
+# def add_job(company_logo, job_modality, job_timing, company_name, position, skills):
+#     new_id = str(uuid.uuid4())
+#     response = supabase.table(JOBS_TABLE).insert({
+#         "id": new_id,
+#         "company_logo": company_logo,
+#         "job_modality": job_modality,
+#         "job_timing": job_timing,
+#         "company_name": company_name,
+#         "position": position,
+#         "skills": skills
+#     }).execute()
+#     if response.data:
+#         st.success("✅ Job added successfully!")
+#         time.sleep(1)
+#         st.success("Operation successful! Please refresh the page.")
+#
+#
+#
+# def delete_job(job_id):
+#     response = supabase.table(JOBS_TABLE).delete().eq("id", str(job_id)).execute()
+#     if response.data:
+#         st.success("🗑️ Job deleted successfully!")
+#         time.sleep(1)
+#         st.success("Operation successful! Please refresh the page.")
+#
+#
+#
+# def update_job(job_id, company_logo, job_modality, job_timing, company_name, position, skills):
+#     response = supabase.table(JOBS_TABLE).update({
+#         "company_logo": company_logo,
+#         "job_modality": job_modality,
+#         "job_timing": job_timing,
+#         "company_name": company_name,
+#         "position": position,
+#         "skills": skills
+#     }).eq("id", str(job_id)).execute()
+#     if response.data:
+#         st.success("✅ Job updated successfully!")
+#         time.sleep(1)
+#         st.success("Operation successful! Please refresh the page.")
+#
+#
+#
+# def fetch_jobs():
+#     response = supabase.table(JOBS_TABLE).select("*").execute()
+#     return pd.DataFrame(response.data)
+#
+#
+# # --- PANEL LABELS ---
+#
+# panel_labels = {
+#     "Executive panel": "Executive Panel",
+#     "Sub-executive panel": "Sub-Executive Panel",
+#     "executive member": "Executive Member",
+#     "senior executive": "Senior Executive",
+#     "general member": "General Member",
+# }
+#
+# # --- SIDEBAR NAVIGATION ---
+#
+# st.sidebar.title("📋 Navigation")
+# mode = st.sidebar.radio("Select Mode", ["👥 Manage Members", "💼 Manage Jobs", "📄 View Jobs"])
+#
+# # --- MAIN CONTENT ---
+#
+# if mode == "👥 Manage Members":
+#     df = fetch_data()
+#     if df.empty:
+#         st.info("No members found.")
+#     else:
+#         # Clean up panel column for filtering
+#         if "Panel" not in df.columns:
+#             st.error("Missing 'Panel' column.")
+#             st.stop()
+#         df["Panel"] = df["Panel"].astype(str).str.strip()
+#
+#     selected_function = st.sidebar.radio(
+#         "Choose Function",
+#         ["➕ Add Member", "✏️ Update Member", "🗑️ Delete Member"],
+#         key="function_radio"
+#     )
+#
+#     if selected_function == "➕ Add Member":
+#         st.subheader("➕ Add New Member")
+#         with st.form("add_member_form"):
+#             name = st.text_input("Name")
+#             panel = st.selectbox("Panel", list(panel_labels.keys()))
+#             department = st.text_input("Department")
+#             designation = st.text_input("Designation")
+#             fb_id = st.text_input("Facebook ID")
+#             linkedin_id = st.text_input("LinkedIn ID")
+#             photo_url = st.text_input("Photo URL (optional)")
+#
+#             submitted = st.form_submit_button("Add Member")
+#             if submitted:
+#                 if not name:
+#                     st.warning("⚠️ Name is required.")
+#                 else:
+#                     add_member(name, panel, department, designation, fb_id, linkedin_id, photo_url)
+#
+#     elif selected_function == "✏️ Update Member":
+#         st.subheader("✏️ Update Member")
+#         search_name = st.text_input("Search member to update by name")
+#         if search_name:
+#             filtered = df[df["Name"].str.contains(search_name, case=False, na=False)]
+#             if filtered.empty:
+#                 st.info("No matching members found.")
+#             else:
+#                 for _, row in filtered.iterrows():
+#                     with st.form(f"update_form_{row['id']}"):
+#                         st.markdown(f"#### Updating: **{row['Name']}**")
+#                         name = st.text_input("Name", value=row["Name"])
+#                         panel = st.selectbox("Panel", list(panel_labels.keys()),
+#                                              index=list(panel_labels.keys()).index(row["Panel"]))
+#                         department = st.text_input("Department", value=row.get("Department", ""))
+#                         designation = st.text_input("Designation", value=row.get("Designation", ""))
+#                         fb_id = st.text_input("Facebook ID", value=row.get("fb id", ""))
+#                         linkedin_id = st.text_input("LinkedIn ID", value=row.get("linkedin id", ""))
+#                         photo_url = st.text_input("Photo URL", value=row.get("photo", ""))
+#
+#                         submitted = st.form_submit_button("Update Member")
+#                         if submitted:
+#                             update_member(row["id"], name, panel, department, designation, fb_id, linkedin_id,
+#                                           photo_url)
+#
+#         st.subheader("📤 CSV Input")
+#         csv_file = st.file_uploader("Upload CSV with columns matching Supabase data", type=["csv"])
+#         if csv_file:
+#             try:
+#                 csv_df = pd.read_csv(csv_file)
+#                 required_cols = ["Name", "Panel", "Department", "Designation", "fb id", "linkedin id", "photo"]
+#                 if not all(col in csv_df.columns for col in required_cols):
+#                     st.warning("⚠️ CSV must contain the following columns:\n" + ", ".join(required_cols))
+#                 else:
+#                     csv_df["id"] = [str(uuid.uuid4()) for _ in range(len(csv_df))]
+#                     records = csv_df.to_dict(orient="records")
+#                     response = supabase.table(TABLE_NAME).insert(records).execute()
+#                     if response.data:
+#                         st.success("✅ CSV data uploaded successfully!")
+#                         time.sleep(1)
+#                         st.success("Operation successful! Please refresh the page.")
+#
+#                     else:
+#                         st.error("❌ Failed to upload data.")
+#             except Exception as e:
+#                 st.error(f"❌ Error processing CSV: {e}")
+#
+#     elif selected_function == "🗑️ Delete Member":
+#         st.subheader("🗑️ Delete Member")
+#         search_name = st.text_input("Search by Name")
+#         if search_name:
+#             filtered = df[df["Name"].str.contains(search_name, case=False, na=False)]
+#             if filtered.empty:
+#                 st.info("No matching members found.")
+#             else:
+#                 for _, row in filtered.iterrows():
+#                     with st.container():
+#                         cols = st.columns([1, 3])
+#                         with cols[0]:
+#                             photo_url = row.get("photo", "")
+#                             if photo_url and photo_url.strip().lower() != "n/a":
+#                                 st.write("Photo URL:", photo_url)
+#                             else:
+#                                 st.markdown("🚫 No Photo")
+#                         with cols[1]:
+#                             st.markdown(
+#                                 f"""
+#                                 **Name:** {row.get('Name', 'N/A')}
+#                                 **Panel:** {row.get('Panel', 'N/A')}
+#                                 **Department:** {row.get('Department', 'N/A')}
+#                                 **Designation:** {row.get('Designation', 'N/A')}
+#                                 **FB ID:** {row.get('fb id', 'N/A')}
+#                                 **LinkedIn ID:** {row.get('linkedin id', 'N/A')}
+#                                 """
+#                             )
+#                         if st.button("🗑️ Delete", key=f"delete_{row['id']}"):
+#                             delete_member(row["id"])
+#
+# elif mode == "💼 Manage Jobs":
+#     job_action = st.sidebar.radio("Select Job Action", ["➕ Add Job", "✏️ Update Job", "🗑️ Delete Job"])
+#
+#     if job_action == "➕ Add Job":
+#         st.subheader("➕ Add Job Listing")
+#         with st.form("add_job_form"):
+#             company_logo = st.text_input("Company Logo URL")
+#
+#             # Dropdown for Job Modality
+#             job_modality = st.selectbox("Job Modality", ["On-Site", "Remote", "Hybrid"])
+#
+#             # Dropdown for Job Timing
+#             job_timing = st.selectbox("Job Timing", ["Full-time", "Part time", "Contractual"])
+#
+#             company_name = st.text_input("Company Name")
+#             position = st.text_input("Position/Role")
+#             skills = st.text_area("Skills (comma-separated)")
+#             submit = st.form_submit_button("Add Job")
+#             if submit:
+#                 add_job(company_logo, job_modality, job_timing, company_name, position, skills)
+#
+#     elif job_action == "✏️ Update Job":
+#         st.subheader("✏️ Update Job Listing")
+#         jobs_df = fetch_jobs()
+#         if jobs_df.empty:
+#             st.info("No jobs found.")
+#         else:
+#             for _, row in jobs_df.iterrows():
+#                 with st.form(f"update_form_{row['id']}"):
+#                     st.markdown(f"**Editing Job at {row['company_name']} - {row['position']}**")
+#                     company_logo = st.text_input("Company Logo", row["company_logo"])
+#                     job_modality = st.text_input("Job Modality", row["job_modality"])
+#                     job_timing = st.text_input("Job Timing", row["job_timing"])
+#                     company_name = st.text_input("Company Name", row["company_name"])
+#                     position = st.text_input("Position", row["position"])
+#                     skills = st.text_area("Skills", row["skills"])
+#                     submit = st.form_submit_button("Update Job")
+#                     if submit:
+#                         update_job(row["id"], company_logo, job_modality, job_timing, company_name, position, skills)
+#
+#     elif job_action == "🗑️ Delete Job":
+#         st.subheader("🗑️ Delete Job Listing")
+#         jobs_df = fetch_jobs()
+#         if jobs_df.empty:
+#             st.info("No jobs to delete.")
+#         else:
+#             for _, row in jobs_df.iterrows():
+#                 with st.container():
+#                     st.markdown(f"**{row['company_name']} - {row['position']}**")
+#                     if st.button("Delete", key=f"delete_{row['id']}"):
+#                         delete_job(row['id'])
+#
+# elif mode == "📄 View Jobs":
+#     st.subheader("📄 All Job Listings")
+#     jobs_df = fetch_jobs()
+#     if jobs_df.empty:
+#         st.info("No job listings available.")
+#     else:
+#         for _, row in jobs_df.iterrows():
+#             with st.container():
+#                 st.markdown(f"""
+#                     **🏢 Company:** {row['company_name']}
+#
+#                     **💼 Position:** {row['position']}
+#
+#                     **🕒 Timing:** {row['job_timing']}
+#
+#                     **📍 Modality:** {row['job_modality']}
+#
+#                     **🧠 Skills:** {row['skills']}
+#                 """)
+#                 if row['company_logo']:
+#                     st.image(row['company_logo'], width=100)
+#                 st.markdown("---")
+
+
 import streamlit as st
 import pandas as pd
 from supabase import create_client, Client
@@ -3479,6 +3829,7 @@ def update_member(row_id, name, panel, department, designation, fb_id, linkedin_
 def add_job(company_logo, job_modality, job_timing, company_name, position, skills):
     new_id = str(uuid.uuid4())
     response = supabase.table(JOBS_TABLE).insert({
+        "id": new_id,
         "company logo": company_logo,
         "job modality": job_modality,
         "job timing": job_timing,
@@ -3492,15 +3843,12 @@ def add_job(company_logo, job_modality, job_timing, company_name, position, skil
         st.success("Operation successful! Please refresh the page.")
 
 
-
-
 def delete_job(job_id):
     response = supabase.table(JOBS_TABLE).delete().eq("id", str(job_id)).execute()
     if response.data:
         st.success("🗑️ Job deleted successfully!")
         time.sleep(1)
         st.success("Operation successful! Please refresh the page.")
-
 
 
 def update_job(job_id, company_logo, job_modality, job_timing, company_name, position, skills):
@@ -3518,10 +3866,10 @@ def update_job(job_id, company_logo, job_modality, job_timing, company_name, pos
         st.success("Operation successful! Please refresh the page.")
 
 
-
 def fetch_jobs():
     response = supabase.table(JOBS_TABLE).select("*").execute()
     return pd.DataFrame(response.data)
+
 
 # --- PANEL LABELS ---
 
@@ -3682,12 +4030,12 @@ elif mode == "💼 Manage Jobs":
         else:
             for _, row in jobs_df.iterrows():
                 with st.form(f"update_form_{row['id']}"):
-                    st.markdown(f"**Editing Job at {row['company_name']} - {row['position']}**")
-                    company_logo = st.text_input("Company Logo", row["company_logo"])
-                    job_modality = st.text_input("Job Modality", row["job_modality"])
-                    job_timing = st.text_input("Job Timing", row["job_timing"])
-                    company_name = st.text_input("Company Name", row["company_name"])
-                    position = st.text_input("Position", row["position"])
+                    st.markdown(f"**Editing Job at {row['company name']} - {row['position/role']}**")
+                    company_logo = st.text_input("Company Logo", row["company logo"])
+                    job_modality = st.text_input("Job Modality", row["job modality"])
+                    job_timing = st.text_input("Job Timing", row["job timing"])
+                    company_name = st.text_input("Company Name", row["company name"])
+                    position = st.text_input("Position/Role", row["position/role"])
                     skills = st.text_area("Skills", row["skills"])
                     submit = st.form_submit_button("Update Job")
                     if submit:
@@ -3701,7 +4049,7 @@ elif mode == "💼 Manage Jobs":
         else:
             for _, row in jobs_df.iterrows():
                 with st.container():
-                    st.markdown(f"**{row['company_name']} - {row['position']}**")
+                    st.markdown(f"**{row['company name']} - {row['position/role']}**")
                     if st.button("Delete", key=f"delete_{row['id']}"):
                         delete_job(row['id'])
 
@@ -3714,16 +4062,16 @@ elif mode == "📄 View Jobs":
         for _, row in jobs_df.iterrows():
             with st.container():
                 st.markdown(f"""
-                    **🏢 Company:** {row['company_name']}
+                    **🏢 Company:** {row['company name']}
 
-                    **💼 Position:** {row['position']}
+                    **💼 Position:** {row['position/role']}
 
-                    **🕒 Timing:** {row['job_timing']}
+                    **🕒 Timing:** {row['job timing']}
 
-                    **📍 Modality:** {row['job_modality']}
+                    **📍 Modality:** {row['job modality']}
 
                     **🧠 Skills:** {row['skills']}
                 """)
-                if row['company_logo']:
-                    st.image(row['company_logo'], width=100)
+                if row['company logo']:
+                    st.image(row['company logo'], width=100)
                 st.markdown("---")
