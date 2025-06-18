@@ -4280,6 +4280,27 @@ if mode == "👥 Manage Members":
                     st.warning("⚠️ Name is required.")
                 else:
                     add_member(name, panel, department, designation, fb_id, linkedin_id, photo_url)
+        st.subheader("📤 CSV Input")
+        csv_file = st.file_uploader("Upload CSV with columns matching Supabase data", type=["csv"])
+        if csv_file:
+            try:
+                csv_df = pd.read_csv(csv_file)
+                required_cols = ["Name", "Panel", "Department", "Designation", "fb id", "linkedin id", "photo"]
+                if not all(col in csv_df.columns for col in required_cols):
+                    st.warning("⚠️ CSV must contain the following columns:\n" + ", ".join(required_cols))
+                else:
+                    csv_df["id"] = [str(uuid.uuid4()) for _ in range(len(csv_df))]
+                    records = csv_df.to_dict(orient="records")
+                    response = supabase.table(TABLE_NAME).insert(records).execute()
+                    if response.data:
+                        st.success("✅ CSV data uploaded successfully!")
+                        time.sleep(1)
+                        st.success("Operation successful! Please refresh the page.")
+
+                    else:
+                        st.error("❌ Failed to upload data.")
+            except Exception as e:
+                st.error(f"❌ Error processing CSV: {e}")
 
     elif selected_function == "✏️ Update Member":
         st.subheader("✏️ Update Member")
@@ -4306,27 +4327,27 @@ if mode == "👥 Manage Members":
                             update_member(row["id"], name, panel, department, designation, fb_id, linkedin_id,
                                           photo_url)
 
-        st.subheader("📤 CSV Input")
-        csv_file = st.file_uploader("Upload CSV with columns matching Supabase data", type=["csv"])
-        if csv_file:
-            try:
-                csv_df = pd.read_csv(csv_file)
-                required_cols = ["Name", "Panel", "Department", "Designation", "fb id", "linkedin id", "photo"]
-                if not all(col in csv_df.columns for col in required_cols):
-                    st.warning("⚠️ CSV must contain the following columns:\n" + ", ".join(required_cols))
-                else:
-                    csv_df["id"] = [str(uuid.uuid4()) for _ in range(len(csv_df))]
-                    records = csv_df.to_dict(orient="records")
-                    response = supabase.table(TABLE_NAME).insert(records).execute()
-                    if response.data:
-                        st.success("✅ CSV data uploaded successfully!")
-                        time.sleep(1)
-                        st.success("Operation successful! Please refresh the page.")
-
-                    else:
-                        st.error("❌ Failed to upload data.")
-            except Exception as e:
-                st.error(f"❌ Error processing CSV: {e}")
+        # st.subheader("📤 CSV Input")
+        # csv_file = st.file_uploader("Upload CSV with columns matching Supabase data", type=["csv"])
+        # if csv_file:
+        #     try:
+        #         csv_df = pd.read_csv(csv_file)
+        #         required_cols = ["Name", "Panel", "Department", "Designation", "fb id", "linkedin id", "photo"]
+        #         if not all(col in csv_df.columns for col in required_cols):
+        #             st.warning("⚠️ CSV must contain the following columns:\n" + ", ".join(required_cols))
+        #         else:
+        #             csv_df["id"] = [str(uuid.uuid4()) for _ in range(len(csv_df))]
+        #             records = csv_df.to_dict(orient="records")
+        #             response = supabase.table(TABLE_NAME).insert(records).execute()
+        #             if response.data:
+        #                 st.success("✅ CSV data uploaded successfully!")
+        #                 time.sleep(1)
+        #                 st.success("Operation successful! Please refresh the page.")
+        #
+        #             else:
+        #                 st.error("❌ Failed to upload data.")
+        #     except Exception as e:
+        #         st.error(f"❌ Error processing CSV: {e}")
 
     elif selected_function == "🗑️ Delete Member":
         st.subheader("🗑️ Delete Member")
