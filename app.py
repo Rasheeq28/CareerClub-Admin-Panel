@@ -4385,6 +4385,8 @@ elif mode == "💼 Manage Jobs":
 
     # (Unchanged code above...)
 
+    # (Unchanged code above...)
+
     elif job_action == "✏️ Update Job":
 
         st.subheader("✏️ Update Job Listing")
@@ -4404,6 +4406,7 @@ elif mode == "💼 Manage Jobs":
                 search_submitted = st.form_submit_button("Search")
 
             if search_term and search_submitted:
+
                 jobs_df = jobs_df[
 
                     jobs_df["company name"].str.contains(search_term, case=False, na=False) |
@@ -4411,6 +4414,10 @@ elif mode == "💼 Manage Jobs":
                     jobs_df["position/role"].str.contains(search_term, case=False, na=False)
 
                     ]
+
+            elif not search_term:
+
+                jobs_df = jobs_df.iloc[0:0]  # Show nothing by default
 
             for _, row in jobs_df.iterrows():
 
@@ -4493,6 +4500,7 @@ elif mode == "💼 Manage Jobs":
                 search_submitted = st.form_submit_button("Search")
 
             if search_term and search_submitted:
+
                 jobs_df = jobs_df[
 
                     jobs_df["company name"].str.contains(search_term, case=False, na=False) |
@@ -4500,6 +4508,10 @@ elif mode == "💼 Manage Jobs":
                     jobs_df["position/role"].str.contains(search_term, case=False, na=False)
 
                     ]
+
+            elif not search_term:
+
+                jobs_df = jobs_df.iloc[0:0]  # Show nothing by default
 
             for _, row in jobs_df.iterrows():
 
