@@ -4397,9 +4397,13 @@ elif mode == "💼 Manage Jobs":
 
         else:
 
-            search_term = st.text_input("Search by company name or position")
+            with st.form("search_update_form"):
 
-            if search_term:
+                search_term = st.text_input("Search by company name or position")
+
+                search_submitted = st.form_submit_button("Search")
+
+            if search_term and search_submitted:
                 jobs_df = jobs_df[
 
                     jobs_df["company name"].str.contains(search_term, case=False, na=False) |
@@ -4482,9 +4486,13 @@ elif mode == "💼 Manage Jobs":
 
         else:
 
-            search_term = st.text_input("Search job to delete by company name or position")
+            with st.form("search_delete_form"):
 
-            if search_term:
+                search_term = st.text_input("Search job to delete by company name or position")
+
+                search_submitted = st.form_submit_button("Search")
+
+            if search_term and search_submitted:
                 jobs_df = jobs_df[
 
                     jobs_df["company name"].str.contains(search_term, case=False, na=False) |
@@ -4501,7 +4509,6 @@ elif mode == "💼 Manage Jobs":
 
                     if st.button("Delete", key=f"delete_{row['id']}"):
                         delete_job(row['id'])
-
 
 elif mode == "📄 View Jobs":
     st.subheader("📄 All Job Listings")
