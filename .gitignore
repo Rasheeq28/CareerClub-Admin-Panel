@@ -1,1 +1,28 @@
-credentials.toml
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Virtual environments
+venv/
+.env/
+
+# IDE files
+.idea/
+.vscode/
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# CSV or sensitive uploads
+*.csv
+*.xlsx
+
+

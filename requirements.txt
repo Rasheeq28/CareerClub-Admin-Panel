@@ -77,3 +77,4 @@ pyparsing~=3.2.3
 streamlit~=1.45.1
 cycler~=0.12.1
 kiwisolver~=1.4.8
+streamlit
