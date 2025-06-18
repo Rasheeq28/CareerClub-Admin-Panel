@@ -4523,6 +4523,8 @@ elif mode == "📄 View Jobs":
         st.info("No job listings available.")
     else:
         for _, row in jobs_df.iterrows():
+            if not row.get("company name"):
+                continue
             with st.container():
                 st.markdown(f"""
                     **🏢 Company:** {row['company name']}
@@ -4547,5 +4549,10 @@ elif mode == "📄 View Jobs":
 
                     **📋 Form:** {row.get('company google forms', 'N/A')}
                 """)
-                st.image(row.get('company logo', ''), width=100)
+                logo_url = row.get('company logo', '')
+                if logo_url and logo_url.startswith("http"):
+                    try:
+                        st.image(logo_url, width=100)
+                    except Exception:
+                        st.warning("⚠️ Unable to load company logo.")
                 st.markdown("---")
