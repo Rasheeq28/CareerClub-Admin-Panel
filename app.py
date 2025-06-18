@@ -4387,6 +4387,8 @@ elif mode == "💼 Manage Jobs":
 
     # (Unchanged code above...)
 
+    # (Unchanged code above...)
+
     elif job_action == "✏️ Update Job":
 
         st.subheader("✏️ Update Job Listing")
@@ -4399,15 +4401,11 @@ elif mode == "💼 Manage Jobs":
 
         else:
 
-            with st.form("search_update_form"):
+            search_term = st.text_input("Search by company name or position")
 
-                search_term = st.text_input("Search by company name or position")
+            if search_term:
 
-                search_submitted = st.form_submit_button("Search")
-
-            if search_term and search_submitted:
-
-                jobs_df = jobs_df[
+                filtered_jobs = jobs_df[
 
                     jobs_df["company name"].str.contains(search_term, case=False, na=False) |
 
@@ -4415,11 +4413,11 @@ elif mode == "💼 Manage Jobs":
 
                     ]
 
-            elif not search_term:
+            else:
 
-                jobs_df = jobs_df.iloc[0:0]  # Show nothing by default
+                filtered_jobs = pd.DataFrame()  # Show nothing by default
 
-            for _, row in jobs_df.iterrows():
+            for _, row in filtered_jobs.iterrows():
 
                 with st.form(f"update_form_{row['id']}"):
 
@@ -4493,15 +4491,11 @@ elif mode == "💼 Manage Jobs":
 
         else:
 
-            with st.form("search_delete_form"):
+            search_term = st.text_input("Search job to delete by company name or position")
 
-                search_term = st.text_input("Search job to delete by company name or position")
+            if search_term:
 
-                search_submitted = st.form_submit_button("Search")
-
-            if search_term and search_submitted:
-
-                jobs_df = jobs_df[
+                filtered_jobs = jobs_df[
 
                     jobs_df["company name"].str.contains(search_term, case=False, na=False) |
 
@@ -4509,11 +4503,11 @@ elif mode == "💼 Manage Jobs":
 
                     ]
 
-            elif not search_term:
+            else:
 
-                jobs_df = jobs_df.iloc[0:0]  # Show nothing by default
+                filtered_jobs = pd.DataFrame()  # Show nothing by default
 
-            for _, row in jobs_df.iterrows():
+            for _, row in filtered_jobs.iterrows():
 
                 with st.container():
 
