@@ -4547,8 +4547,5 @@ elif mode == "📄 View Jobs":
 
                     **📋 Form:** {row.get('company google forms', 'N/A')}
                 """)
-                if row['company logo']:
-                    st.image(row['company logo'], width=100)
+                st.image(row.get('company logo', ''), width=100)
                 st.markdown("---")
-
-
